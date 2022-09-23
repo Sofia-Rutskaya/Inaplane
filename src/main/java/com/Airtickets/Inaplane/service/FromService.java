@@ -1,10 +1,9 @@
 package com.Airtickets.Inaplane.service;
 
-import com.Airtickets.Inaplane.persistence.entity.From;
+import com.Airtickets.Inaplane.persistence.entity.CityFrom;
+import com.Airtickets.Inaplane.persistence.entity.TimeTicket;
 import com.Airtickets.Inaplane.persistence.repository.IFromRepository;
-import com.Airtickets.Inaplane.persistence.repository.ITicketRepository;
 import com.Airtickets.Inaplane.service.interfaces.IFromService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,24 +16,35 @@ public class FromService implements IFromService {
         _fromRepository = fromRepository;
     }
 
-
     @Override
-    public List<From> getAllItem() {
+    public TimeTicket getTimeById(Long id) {
+       // return _fromRepository.getTimeById(id);
         return null;
     }
 
     @Override
-    public void create(From from) {
-
+    public List<CityFrom> getAllItem() {
+        return _fromRepository.findAll();
     }
 
     @Override
-    public From getById(Long id) {
+    public void create(CityFrom from) {
+        _fromRepository.save(from);
+    }
+
+    @Override
+    public List<TimeTicket> getTime() {
+       // return _fromRepository.getTime();
         return null;
+    }
+
+    @Override
+    public CityFrom getById(Long id) {
+        return _fromRepository.findById(id).get();
     }
 
     @Override
     public void delete(Long id) {
-
+        _fromRepository.deleteById(id);
     }
 }

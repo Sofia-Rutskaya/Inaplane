@@ -1,13 +1,17 @@
 package com.Airtickets.Inaplane.service.interfaces;
 
-import com.Airtickets.Inaplane.persistence.entity.From;
+import com.Airtickets.Inaplane.persistence.entity.CityFrom;
+import com.Airtickets.Inaplane.persistence.entity.TimeTicket;
 
 import java.util.List;
 
 public interface IFromService {
-    List<From> getAllItem();
+    List<CityFrom> getAllItem();
 
-    void create(From from);
-    From getById(Long id);
+    void create(CityFrom from);
+    CityFrom getById(Long id);
     void delete(Long id);
+
+    TimeTicket getTimeById(Long id);
+    List<TimeTicket> getTime();
 }

@@ -7,7 +7,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "ticketsfrom")
-public @Data class From extends BaseEntity {
+public @Data class CityFrom extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
