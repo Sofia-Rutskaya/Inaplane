@@ -8,18 +8,27 @@ import javax.persistence.*;
 @Data
 @Table(name = "ticketsto")
 public class CityTo extends BaseEntity {
+    public CityTo(Long id, String countryTo, String cityTo) {
+        this.id = id;
+        this.countryTo = countryTo;
+        this.cityTo = cityTo;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "countryTo")
+    @Column(name = "country_to", nullable = false)
     public String countryTo;
 
-    @Column(name = "cityTo")
+    @Column(name = "city_to", nullable = false)
     public String cityTo;
 
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
-    private Tickets ticket;
+    @JoinColumn(name = "ticket_id" , nullable = false)
+    public Tickets ticket;
+
+    public CityTo() {
+
+    }
 }
