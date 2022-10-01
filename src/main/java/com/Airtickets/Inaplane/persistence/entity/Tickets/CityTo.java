@@ -1,5 +1,7 @@
-package com.Airtickets.Inaplane.persistence.entity;
+package com.Airtickets.Inaplane.persistence.entity.Tickets;
 
+import com.Airtickets.Inaplane.persistence.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,17 +20,22 @@ public class CityTo extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "country_to", nullable = false)
+    @Column(name = "country_to")
     public String countryTo;
 
-    @Column(name = "city_to", nullable = false)
+    @Column(name = "city_to")
     public String cityTo;
 
-    @OneToOne
-    @JoinColumn(name = "ticket_id" , nullable = false)
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticket_id")
     public Tickets ticket;
 
     public CityTo() {
 
+    }
+@JsonIgnore
+    public Tickets getTicket() {
+        return ticket;
     }
 }

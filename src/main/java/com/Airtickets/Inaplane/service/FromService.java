@@ -1,14 +1,11 @@
 package com.Airtickets.Inaplane.service;
 
-import com.Airtickets.Inaplane.persistence.entity.CityFrom;
-import com.Airtickets.Inaplane.persistence.entity.TimeTicket;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.CityFrom;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
 import com.Airtickets.Inaplane.persistence.repository.IFromRepository;
 import com.Airtickets.Inaplane.service.interfaces.IFromService;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service

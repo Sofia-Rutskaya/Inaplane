@@ -1,5 +1,6 @@
-package com.Airtickets.Inaplane.persistence.entity;
+package com.Airtickets.Inaplane.persistence.entity.Tickets;
 
+import com.Airtickets.Inaplane.persistence.entity.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,6 @@ public @Data class TimeTicket extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "date_from", nullable = false)
+    @Column(name = "date_from")
     public Date dateFrom;
 }

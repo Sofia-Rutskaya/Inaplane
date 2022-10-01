@@ -1,11 +1,8 @@
 package com.Airtickets.Inaplane.persistence.repository;
 
-import com.Airtickets.Inaplane.persistence.entity.CityFrom;
-import com.Airtickets.Inaplane.persistence.entity.TimeTicket;
-import org.springframework.data.jpa.repository.Query;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.CityFrom;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 @Repository
 public interface IFromRepository extends IBaseRepository<CityFrom>{
    /* @Query("select CityFrom.times from CityFrom as f inner join f.times where

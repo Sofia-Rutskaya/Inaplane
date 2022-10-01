@@ -1,7 +1,8 @@
 package com.Airtickets.Inaplane.service.interfaces;
 
-import com.Airtickets.Inaplane.persistence.entity.CityFrom;
-import com.Airtickets.Inaplane.persistence.entity.TimeTicket;
+
+import com.Airtickets.Inaplane.persistence.entity.Tickets.CityFrom;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
 
 import java.util.List;
 

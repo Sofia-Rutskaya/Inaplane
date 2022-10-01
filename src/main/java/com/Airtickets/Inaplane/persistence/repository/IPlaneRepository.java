@@ -1,6 +1,7 @@
 package com.Airtickets.Inaplane.persistence.repository;
 
-import com.Airtickets.Inaplane.persistence.entity.Plane;
+
+import com.Airtickets.Inaplane.persistence.entity.Tickets.Plane;
 import org.springframework.stereotype.Repository;
 
 @Repository
