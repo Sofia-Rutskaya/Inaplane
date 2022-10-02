@@ -14,8 +14,7 @@ public class UsersData extends BaseEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    public String password;
+
 
     @OneToMany
     @JoinColumn(name = "user_ticket_id")

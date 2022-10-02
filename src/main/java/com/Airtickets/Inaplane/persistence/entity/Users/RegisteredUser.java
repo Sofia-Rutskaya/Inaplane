@@ -15,15 +15,18 @@ public class RegisteredUser extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email",nullable = false, unique = true)
     private String email;
 
     @OneToOne(mappedBy = "registeredUsers", cascade = CascadeType.ALL)
     private UsersData usersData;
 
+    @Column(name = "password", nullable = false)
+    public String password;
+    @Column(name = "enabled")
     private Boolean enabled;
 
     @Enumerated(EnumType.STRING)
