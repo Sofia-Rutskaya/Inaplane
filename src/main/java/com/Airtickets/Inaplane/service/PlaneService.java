@@ -2,7 +2,7 @@ package com.Airtickets.Inaplane.service;
 
 
 import com.Airtickets.Inaplane.persistence.entity.Tickets.Plane;
-import com.Airtickets.Inaplane.persistence.repository.IPlaneRepository;
+import com.Airtickets.Inaplane.persistence.repository.TicketsRepo.IPlaneRepository;
 import com.Airtickets.Inaplane.service.interfaces.IPlaneService;
 import org.springframework.stereotype.Service;
 

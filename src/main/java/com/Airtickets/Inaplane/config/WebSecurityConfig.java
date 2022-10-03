@@ -1,4 +1,4 @@
-package com.Airtickets.Inaplane.config;
+/*package com.Airtickets.Inaplane.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -40,3 +40,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select u.full_name, ur.roles from registered_users u inner join user_role ur on u.id = ur.user_id where u.username=?");
     }
 }
+*/
