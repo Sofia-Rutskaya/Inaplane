@@ -1,40 +1,52 @@
 package com.Airtickets.Inaplane.controller;
 
 import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
-import com.Airtickets.Inaplane.persistence.repository.UserRepo.IUserRepository;
-import com.Airtickets.Inaplane.persistence.types.Roles;
+import com.Airtickets.Inaplane.service.interfaces.IUserService;
+import com.Airtickets.Inaplane.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/Reg")
+@RequestMapping("/auth")
 public class RegistrationController {
-    @Autowired
-    private IUserRepository userRepository;
 
+    private final UserValidator userValidator;
+    private final IUserService userService;
+    @Autowired
+    public RegistrationController(UserValidator userValidator, IUserService userService) {
+        this.userValidator = userValidator;
+        this.userService = userService;
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "auth/login";
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
     @GetMapping("/registration")
-    public ModelAndView registration() {
-        return  new ModelAndView("forward:/registration");
+    public String registrationPage(@ModelAttribute("user") RegisteredUser user) {
+        return "auth/registration";
     }
     @PostMapping("/registration")
-    public ModelAndView addUser(RegisteredUser user, Map<String, Object> model) {
-        RegisteredUser userFromDb = userRepository.findByUsername(user.getFullName());
+    public String createUser(@ModelAttribute("user") @Valid RegisteredUser user, BindingResult bindingResult) {
 
-        if (userFromDb != null) {
-            model.put("message", "User exists!");
-            return  new ModelAndView("forward:/registration");
+        userValidator.validate(user, bindingResult);
+        if(bindingResult.hasErrors()){
+            return "/auth/registration";
         }
-
-        user.setEnabled(true);
-        user.setRoles(Roles.REGISTERED_USER);
-        userRepository.save(user);
-
-        return  new ModelAndView("forward:/registration");
+        userService.register(user);
+        return "redirect:/auth/login";
     }
 }

@@ -10,6 +10,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "registered_users")
 public class RegisteredUser extends BaseEntity {
+    public RegisteredUser(String fullName, String email, String password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.enabled = true;
+        this.roles = Roles.REGISTERED_USER;
+    }
+    public RegisteredUser(RegisteredUser user) {
+        this.fullName = user.getFullName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.enabled = true;
+        this.roles = Roles.REGISTERED_USER;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +44,12 @@ public class RegisteredUser extends BaseEntity {
     private Boolean enabled;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role_type", nullable = false)
+    @Column(name = "role_type")
     private Roles roles;
 
     public RegisteredUser() {
         this.enabled = true;
+        this.roles = Roles.REGISTERED_USER;
     }
 
 }

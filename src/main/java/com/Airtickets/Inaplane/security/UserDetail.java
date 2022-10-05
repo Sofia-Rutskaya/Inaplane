@@ -48,4 +48,8 @@ public class UserDetail implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public RegisteredUser getUser(){
+        return this.person;
+    }
 }

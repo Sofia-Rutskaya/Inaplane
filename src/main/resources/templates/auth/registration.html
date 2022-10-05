@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html   lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <title>Registration</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=PT+Sans'><link rel="stylesheet" href="../../css/regPage.css">
+
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card">
+        <h2 class="card-title text-center">Registration</h2>
+        <div class="card-body py-md-4">
+          <form _lpchecked="1" th:method="POST" th:object="${user}" th:action="@{/auth/registration}">
+            <div class="form-group">
+              <input type="text" th:field="*{fullName}" class="form-control" id="name" placeholder="Name">
+              <div style="color: red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Username Error</div>
+            </div>
+            <div class="form-group">
+              <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+              <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password">
+              <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+
+            </div>
+
+            <div class="d-flex flex-row align-items-center justify-content-between">
+              <a href="#">Login</a>
+              <input type="submit" class="btn btn-primary">Create Account</input>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
