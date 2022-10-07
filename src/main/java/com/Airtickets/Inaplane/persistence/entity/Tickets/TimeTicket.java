@@ -5,6 +5,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -14,7 +16,7 @@ public @Data class TimeTicket extends BaseEntity {
     public TimeTicket() {
     }
 
-    public TimeTicket(Long id, Date dateFrom) {
+    public TimeTicket(Long id, LocalDate dateFrom) {
         this.id = id;
         this.dateFrom = dateFrom;
     }
@@ -24,5 +26,7 @@ public @Data class TimeTicket extends BaseEntity {
     public Long id;
 
     @Column(name = "date_from")
-    public Date dateFrom;
+    public LocalDate dateFrom;
+    @Column(name = "time_from")
+    public LocalTime timeFrom;
 }

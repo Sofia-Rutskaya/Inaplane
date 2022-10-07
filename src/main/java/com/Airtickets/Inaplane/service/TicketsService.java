@@ -1,9 +1,11 @@
 package com.Airtickets.Inaplane.service;
 import com.Airtickets.Inaplane.persistence.entity.Tickets.Tickets;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
 import com.Airtickets.Inaplane.persistence.repository.TicketsRepo.ITicketRepository;
 import com.Airtickets.Inaplane.service.interfaces.ITicketsService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -38,6 +40,25 @@ public class TicketsService implements ITicketsService {
         var ticket = _ticketRepository.findById(id);
         return ticket.get();
     }
+
+     @Override
+        public Long getTicket(String cityFrom, String cityTo, LocalDate datatime) {
+            var ticket = _ticketRepository.findAll();
+         for (Tickets item: ticket) {
+
+             if(item.getFrom().getCityFrom().equals(cityFrom)
+                     && item.getCityTo().getCityTo().equals(cityTo)){
+
+                 for (TimeTicket date:
+                      item.getFrom().getTimes()) {
+                     if(date.getDateFrom().equals(datatime)){
+                         return item.getId();
+                     }
+                 }
+             }
+         }
+         return null;
+        }
 
     @Override
     public void delete(Long id) {

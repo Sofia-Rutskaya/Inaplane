@@ -1,7 +1,6 @@
 package com.Airtickets.Inaplane.persistence.entity.Tickets;
 
 import com.Airtickets.Inaplane.persistence.entity.BaseEntity;
-import com.Airtickets.Inaplane.persistence.entity.Users.UsersData;
 import com.Airtickets.Inaplane.persistence.types.Currency;
 import com.Airtickets.Inaplane.persistence.types.TicketTypeClass;
 import lombok.Data;

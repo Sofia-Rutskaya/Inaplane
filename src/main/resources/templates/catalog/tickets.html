@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label>TICKET PAGE</label>
+<form th:action="@{/catalog/tickets/}" th:method="POST" th:object="${model}">
+
+    <th:block th:each="items, state : ${model.getTimeFrom()}" >
+        <div>
+
+        <td th:text="${model.getCity_to()}"></td>
+        <td th:text="${model.getDateFrom()}"></td>
+        <td th:text="${model.getPrice()}"></td>
+        <td th:text="${model.getCurrency()}"></td>
+        <td th:text="${state.count}">No</td>
+        <td th:text="${items}">Time</td>
+        <input type="submit">
+        </div>
+    </th:block>
+</form>
+
+</body>
+</html>

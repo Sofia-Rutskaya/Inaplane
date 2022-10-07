@@ -1,10 +1,11 @@
 package com.Airtickets.Inaplane.persistence.entity.Users;
 
 import com.Airtickets.Inaplane.persistence.entity.BaseEntity;
-import com.Airtickets.Inaplane.persistence.types.Roles;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.UsersTicket;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,14 +16,12 @@ public class RegisteredUser extends BaseEntity {
         this.email = email;
         this.password = password;
         this.enabled = true;
-        this.roles = Roles.REGISTERED_USER;
     }
     public RegisteredUser(RegisteredUser user) {
         this.fullName = user.getFullName();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.enabled = true;
-        this.roles = Roles.REGISTERED_USER;
     }
 
     @Id
@@ -35,21 +34,20 @@ public class RegisteredUser extends BaseEntity {
     @Column(name = "email",nullable = false, unique = true)
     private String email;
 
-    @OneToOne(mappedBy = "registeredUsers", cascade = CascadeType.ALL)
-    private UsersData usersData;
-
     @Column(name = "password", nullable = false)
     public String password;
     @Column(name = "enabled")
     private Boolean enabled;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role_type")
-    private Roles roles;
+    @Column(name = "role")
+    private String role;
+
+    @OneToMany
+    @JoinColumn(name = "user_ticket_id")
+    private List<UsersTicket> usersTicket;
 
     public RegisteredUser() {
         this.enabled = true;
-        this.roles = Roles.REGISTERED_USER;
     }
 
 }

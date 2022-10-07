@@ -4,6 +4,7 @@ import com.Airtickets.Inaplane.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +16,7 @@ import java.net.PasswordAuthentication;
 
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 private final UserDetailService userDetailService;
@@ -25,10 +27,10 @@ private final UserDetailService userDetailService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.csrf().disable()
-                .authorizeHttpRequests()
-                .antMatchers("/auth/login", "/error", "/auth/registration").permitAll()
-                .anyRequest().authenticated()
+        http.authorizeHttpRequests()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/auth/login", "/error", "/auth/registration", "/home", "/catalog/tickets/**" ).permitAll()
+                .anyRequest().hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")

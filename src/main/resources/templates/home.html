@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<label>Hello world! </label>
-<a href="/logout">Logout</a>
+<label>Hello </label>
+
+<form th:action="@{/logout}">
+    <input type="submit" value="Logout"></input>
+</form >
+<form  th:method="POST" th:object="${model}" th:action="@{/home}">
+
+<select th:field="${model.cityFromList}" class="form-control" id="dropDownList2">
+
+    <option  th:each="option : ${model.cityFromList}" th:value="${option}" th:text="${option}"></option>
+</select>
+
+<select th:field="${model.cityToList}"  class="form-control" id="dropDownList4">
+    <option th:each="option : ${model.cityToList}" th:value="${option}" th:text="${option}"></option>
+</select>
+
+    <input type="date" th:field="${model.dataTime}">
+<input type="submit">
+</form>
 </body>
 </html>
