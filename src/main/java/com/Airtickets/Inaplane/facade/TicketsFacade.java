@@ -53,8 +53,10 @@ public class TicketsFacade implements ITicketsFacade {
         ticketService.create(ticket);
     }
 
-    public Tickets getTicketById(@PathVariable Long id){
-        return ticketService.getById(id);
+    public TicketsDTO getTicketById(@PathVariable Long id){
+        var item = ticketService.getById(id);
+        TicketsDTO newTicket = new TicketsDTO(item);
+        return newTicket;
     }
 
     public Long getTicket(String cityFrom, String cityTo, LocalDate datatime){

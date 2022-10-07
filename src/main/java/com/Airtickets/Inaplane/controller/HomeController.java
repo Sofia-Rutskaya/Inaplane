@@ -44,7 +44,7 @@ public class HomeController {
         LocalDate date = LocalDate.parse(model.getDataTime());
         var id = ticketsFacade.getTicket(model.getCityFromList().stream().findFirst().get(), model.getCityToList().stream().findFirst().get(), date);
 
-        return "redirect:/catalog/tickets/" + id ;
+        return "redirect:/catalog/tickets?id_ticket=" + id +"&date_ticket=" + date;
     }
 
     @GetMapping("/admin")

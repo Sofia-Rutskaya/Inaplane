@@ -27,9 +27,10 @@ private final UserDetailService userDetailService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests()
+        http
+                .authorizeHttpRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/error", "/auth/registration", "/home", "/catalog/tickets/**" ).permitAll()
+                .antMatchers("/auth/login", "/error", "/auth/registration", "/home", "/catalog/**" ).permitAll()
                 .anyRequest().hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin().loginPage("/auth/login")

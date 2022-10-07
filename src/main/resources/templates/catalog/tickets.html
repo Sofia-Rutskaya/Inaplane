@@ -6,21 +6,19 @@
 </head>
 <body>
 <label>TICKET PAGE</label>
-<form th:action="@{/catalog/tickets/}" th:method="POST" th:object="${model}">
 
-    <th:block th:each="items, state : ${model.getTimeFrom()}" >
-        <div>
+    <th:block  th:each="items, state : ${model.getTimeFrom()}" >
 
-        <td th:text="${model.getCity_to()}"></td>
-        <td th:text="${model.getDateFrom()}"></td>
-        <td th:text="${model.getPrice()}"></td>
-        <td th:text="${model.getCurrency()}"></td>
-        <td th:text="${state.count}">No</td>
-        <td th:text="${items}">Time</td>
-        <input type="submit">
-        </div>
+     <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${items}}" th:method="POST">
+
+         <td th:field="*{id}" th:text="${model.id}" >
+         <br>
+        <td th:field="*{timeFrom}" th:text="${items}" name="${items}"></td>
+
+         <input type="submit">
+    </form>
     </th:block>
-</form>
+
 
 </body>
 </html>

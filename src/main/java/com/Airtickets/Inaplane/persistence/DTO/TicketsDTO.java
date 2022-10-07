@@ -24,14 +24,14 @@ public @Data class TicketsDTO extends BaseDTO{
 
     public String countryFrom;
     public String cityFrom;
-    public List<LocalDate> dateFrom ;
-    public List<LocalTime> timeFrom;
+    public List<String> dateFrom ;
+    public List<String> timeFrom;
 
     public TicketsDTO(Long id, Time time_in, double price,
                       Currency currency, String country_to,
                       String city_to, String countryFrom,
-                      String cityFrom, List<LocalDate> dateFrom,
-                      List<LocalTime> timeFrom) {
+                      String cityFrom, List<String> dateFrom,
+                      List<String> timeFrom) {
         this.id = id;
         this.time_in = time_in;
         this.price = price;
@@ -61,8 +61,8 @@ public @Data class TicketsDTO extends BaseDTO{
         this.dateFrom = new ArrayList<>();
         for (TimeTicket date:
              tickets.getFrom().getTimes()) {
-            this.dateFrom.add(date.getDateFrom());
-            this.timeFrom.add(date.getTimeFrom());
+            this.dateFrom.add(date.getDateFrom().toString());
+            this.timeFrom.add(date.getTimeFrom().toString());
         }
     }
 
