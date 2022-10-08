@@ -4,11 +4,20 @@ import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
 import com.Airtickets.Inaplane.persistence.DTO.CityFromDTO;
 import com.Airtickets.Inaplane.persistence.DTO.CityTicketDTO;
 import com.Airtickets.Inaplane.persistence.DTO.CityToDTO;
+import com.Airtickets.Inaplane.security.UserDetail;
+import com.Airtickets.Inaplane.util.SecurityUtil;
 import lombok.Data;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +54,17 @@ public class HomeController {
         var id = ticketsFacade.getTicket(model.getCityFromList().stream().findFirst().get(), model.getCityToList().stream().findFirst().get(), date);
 
         return "redirect:/catalog/tickets?id_ticket=" + id +"&date_ticket=" + date;
+    }
+    @GetMapping("/showUserInfo")
+    public String getUser(@CurrentSecurityContext SecurityContext context, HttpServletRequest request,
+                          HttpSession session){
+        String user = SecurityUtil.getUsername();
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    UserDetail detail = (UserDetail) authentication.getPrincipal();
+    var ite = detail.getUsername();
+    System.out.println(detail.getUser());
+    return "home";
     }
 
     @GetMapping("/admin")

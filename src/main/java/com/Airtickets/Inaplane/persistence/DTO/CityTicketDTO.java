@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class CityTicketDTO {
+public class CityTicketDTO extends BaseDTO{
     Long id;
     List<String> cityFromList;
     List<String> cityToList;

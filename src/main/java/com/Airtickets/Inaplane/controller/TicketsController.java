@@ -22,7 +22,8 @@ class TicketsController {
     }
 
     @GetMapping("/tickets")
-    public String getAllTickets ( @RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date, @ModelAttribute("model") TicketsDTO model){
+    public String getAllTickets ( @RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
+                                  @ModelAttribute("model") TicketsDTO model){
          //var ticket = ticketsFacade.getAllTickets();
         try{
             //LocalDate dateTicket = LocalDate.parse(date);
@@ -36,6 +37,7 @@ class TicketsController {
 
 
             model.timeFrom = ticket.timeFrom;
+            model.dateBookingTicket = date;
             model.cityFrom = ticket.cityFrom;
             model.countryFrom = ticket.countryFrom;
             model.city_to = ticket.city_to;
@@ -52,9 +54,10 @@ class TicketsController {
     }
 
     @RequestMapping(value = "/tickets", method = RequestMethod.POST)
-    public String getFilterTickets (@RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date, @ModelAttribute("model") TicketsDTO model){
+    public String getFilterTickets (@RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
+                                    @RequestParam(value = "time_ticket") String time){
          //var ticket = ticketsFacade.getAllTickets();
-        return "redirect:/auth/login";
+        return "redirect:/booking/ticket?id_ticket=" + id +"&date_ticket=" + date +"&time_ticket=" + time;
     }
 
 }

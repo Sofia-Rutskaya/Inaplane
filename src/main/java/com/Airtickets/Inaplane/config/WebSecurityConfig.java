@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,15 +31,14 @@ private final UserDetailService userDetailService;
         http
                 .authorizeHttpRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/error", "/auth/registration", "/home", "/catalog/**" ).permitAll()
+                .antMatchers("/auth/login", "/error", "/auth/registration","/showUserInfo" ,"/home", "/catalog/**", "/booking/**" ).permitAll()
                 .anyRequest().hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/registration", true)
-                .failureUrl("/auth/login?error")
-                .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login");
+                .defaultSuccessUrl("/home", true)
+                .failureUrl("/auth/login?error").permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/auth/login");
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

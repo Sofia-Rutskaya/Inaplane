@@ -9,12 +9,18 @@
 
     <th:block  th:each="items, state : ${model.getTimeFrom()}" >
 
-     <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${items}}" th:method="POST">
+     <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${model.dateBookingTicket} +'&time_ticket=' + ${items}}" th:method="POST">
 
-         <td th:field="*{id}" th:text="${model.id}" >
-         <br>
+         <td th:text="${state.count} "></td>
+
+         <td th:field="*{id}" th:text="${model.id} " >
+         <td th:field="*{dateBookingTicket}"  th:text="${model.dateFrom} "></td>
         <td th:field="*{timeFrom}" th:text="${items}" name="${items}"></td>
 
+         <td th:text="${model.cityFrom}"></td>
+         <td th:text="${model.city_to}"></td>
+         <td   th:text="${model.price}" ></td>
+         <td  th:text="${model.currency}" ></td>
          <input type="submit">
     </form>
     </th:block>

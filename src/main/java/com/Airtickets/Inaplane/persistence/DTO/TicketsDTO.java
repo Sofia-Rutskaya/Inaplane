@@ -25,30 +25,17 @@ public @Data class TicketsDTO extends BaseDTO{
     public String countryFrom;
     public String cityFrom;
     public List<String> dateFrom ;
+    public String dateBookingTicket ;
+    public String timeBookingTicket ;
     public List<String> timeFrom;
-
-    public TicketsDTO(Long id, Time time_in, double price,
-                      Currency currency, String country_to,
-                      String city_to, String countryFrom,
-                      String cityFrom, List<String> dateFrom,
-                      List<String> timeFrom) {
-        this.id = id;
-        this.time_in = time_in;
-        this.price = price;
-        this.currency = currency;
-        this.country_to = country_to;
-        this.city_to = city_to;
-        this.countryFrom = countryFrom;
-        this.cityFrom = cityFrom;
-        this.dateFrom = dateFrom;
-        this.timeFrom = timeFrom;
-    }
 
     public TicketsDTO(){
         
     }
 
     public TicketsDTO(Tickets tickets) {
+        if(tickets == null)
+            return;
         this.id = tickets.getId();
         this.time_in = tickets.getTimeIn();
         this.price = tickets.getPrice();

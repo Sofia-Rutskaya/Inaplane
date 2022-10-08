@@ -26,25 +26,25 @@ public class RegisteredUser extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @Column(name = "full_name", nullable = false)
-    private String fullName;
+    public String fullName;
 
     @Column(name = "email",nullable = false, unique = true)
-    private String email;
+    public String email;
 
     @Column(name = "password", nullable = false)
-    public String password;
+    private String password;
     @Column(name = "enabled")
     private Boolean enabled;
 
     @Column(name = "role")
-    private String role;
+    public String role;
 
     @OneToMany
     @JoinColumn(name = "user_ticket_id")
-    private List<UsersTicket> usersTicket;
+    public List<UsersTicket> usersTicket;
 
     public RegisteredUser() {
         this.enabled = true;
