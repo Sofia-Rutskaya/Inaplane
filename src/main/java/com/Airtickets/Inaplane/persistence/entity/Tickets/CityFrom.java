@@ -23,10 +23,10 @@ public @Data class CityFrom extends BaseEntity {
     public String countryFrom;
     @Column(name = "city_from")
     public String cityFrom;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_from_id")
     private List<TimeTicket> times;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id")
     private Tickets ticket;
 @JsonIgnore

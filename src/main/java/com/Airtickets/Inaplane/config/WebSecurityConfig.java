@@ -31,7 +31,7 @@ private final UserDetailService userDetailService;
         http
                 .authorizeHttpRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/error", "/auth/registration","/showUserInfo" ,"/home", "/catalog/**", "/booking/**" ).permitAll()
+                .antMatchers("/auth/login", "/error", "/auth/registration","/showUserInfo" ,"/home", "/catalog/**", "/booking/**", "/profile").permitAll()
                 .anyRequest().hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin().loginPage("/auth/login")

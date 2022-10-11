@@ -42,7 +42,7 @@ public class RegisteredUser extends BaseEntity {
     @Column(name = "role")
     public String role;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_ticket_id")
     public List<UsersTicket> usersTicket;
 

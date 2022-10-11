@@ -26,7 +26,7 @@ public @Data class TicketsDTO extends BaseDTO{
     public String cityFrom;
     public List<String> dateFrom ;
     public String dateBookingTicket ;
-    public String timeBookingTicket ;
+    public String timeBookingTicket;
     public List<String> timeFrom;
 
     public TicketsDTO(){
@@ -36,14 +36,14 @@ public @Data class TicketsDTO extends BaseDTO{
     public TicketsDTO(Tickets tickets) {
         if(tickets == null)
             return;
-        this.id = tickets.getId();
-        this.time_in = tickets.getTimeIn();
-        this.price = tickets.getPrice();
-        this.currency = tickets.getCurrency();
-        this.city_to = tickets.getCityTo().cityTo;
-        this.cityFrom = tickets.getFrom().cityFrom;
-        this.countryFrom = tickets.getFrom().countryFrom;
-        this.country_to = tickets.getCityTo().countryTo;
+        setId(tickets.getId());
+        setCurrency(tickets.getCurrency());
+        setCityFrom(tickets.getFrom().cityFrom);
+        setCity_to(tickets.getCityTo().cityTo);
+        setTime_in(tickets.getTimeIn());
+        setPrice(tickets.getPrice());
+        setCountryFrom(tickets.getFrom().countryFrom);
+        setCountry_to(tickets.getCityTo().countryTo);
         this.timeFrom = new ArrayList<>();
         this.dateFrom = new ArrayList<>();
         for (TimeTicket date:
@@ -51,6 +51,21 @@ public @Data class TicketsDTO extends BaseDTO{
             this.dateFrom.add(date.getDateFrom().toString());
             this.timeFrom.add(date.getTimeFrom().toString());
         }
+    }
+
+    public TicketsDTO(TicketsDTO tickets) {
+        if(tickets == null)
+            return;
+        setId(tickets.getId());
+        setCurrency(tickets.getCurrency());
+        setCityFrom(tickets.cityFrom);
+        setCity_to(tickets.city_to);
+        setTime_in(tickets.time_in);
+        setPrice(tickets.getPrice());
+        setCountryFrom(tickets.countryFrom);
+        setCountry_to(tickets.country_to);
+        setDateFrom(tickets.getDateFrom());
+        setTimeFrom(tickets.getTimeFrom());
     }
 
 

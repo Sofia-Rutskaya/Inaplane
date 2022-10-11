@@ -34,11 +34,15 @@ public class Tickets extends BaseEntity {
     public Currency currency;
 
 
-    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private CityFrom from;
 
-    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private Plane plane;
+
+
 
     @OneToOne(mappedBy = "ticket",  cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)

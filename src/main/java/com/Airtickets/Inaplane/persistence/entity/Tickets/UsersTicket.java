@@ -1,11 +1,13 @@
 package com.Airtickets.Inaplane.persistence.entity.Tickets;
 
 import com.Airtickets.Inaplane.persistence.entity.BaseEntity;
+import com.Airtickets.Inaplane.persistence.types.AgeTicket;
 import com.Airtickets.Inaplane.persistence.types.Currency;
 import com.Airtickets.Inaplane.persistence.types.TicketTypeClass;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,6 +24,9 @@ public class UsersTicket extends BaseEntity {
     @Enumerated(EnumType.STRING)
     public TicketTypeClass typeClass;
 
+    @Enumerated(EnumType.STRING)
+    public AgeTicket ageTicket;
+
     @Column(name = "price")
     public double price;
 
@@ -32,4 +37,10 @@ public class UsersTicket extends BaseEntity {
     @Column(name = "active")
     public boolean active;
 
+    @Column(name = "ticket_id")
+    public Long ticket;
+
+    @OneToOne
+    @JoinColumn(name = "date_ticket_id")
+    private TimeTicket times;
 }

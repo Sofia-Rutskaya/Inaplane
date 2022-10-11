@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block  th:each="ticket, state : ${profile.getTicket()}" >
+
+<form method="post" th:object="${profile}"  th:action="@{'/booking/remove_ticket?ticket=' + ${ticket.id}}">
+  <input type="hidden" th:field="*{ticket}" th:value="${ticket.id}">
+  <td th:name="${ticket.countryFrom} "></td>
+
+  <td th:text="${ticket.cityFrom} " >
+
+  <td th:text="${ticket.country_to}"></td>
+  <td th:text="${ticket.city_to}"></td>
+  <br>
+  <td   th:text="${ticket.dateBookingTicket} "></td>
+  <td   th:text="${ticket.timeBookingTicket} "></td>
+  <td   th:text="${ticket.time_in.toString()} "></td>
+  <br>
+  <td   th:text="${ticket.price}" ></td>
+  <td  th:text="${ticket.currency}" ></td>
+  <td  th:text="${ticket.ageTicket.toString()}" ></td>
+  <td  th:text="${ticket.typeClass.toString()}" ></td>
+  <td  th:text="${ticket.placeNumber}" ></td>
+  <br>
+  <td>-----------------------</td>
+  <br>
+  <input type="submit">
+</form>
+</th:block>
+
+</body>
+</html>

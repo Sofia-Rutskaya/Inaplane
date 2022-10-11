@@ -2,9 +2,12 @@ package com.Airtickets.Inaplane.controller;
 
 import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
 import com.Airtickets.Inaplane.facade.interfaces.IUserFacade;
-import com.Airtickets.Inaplane.persistence.DTO.UserBookingTicketDTO;
-import com.Airtickets.Inaplane.persistence.DTO.UserDTO;
+import com.Airtickets.Inaplane.persistence.DTO.*;
+import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
+import com.Airtickets.Inaplane.persistence.types.AgeTicket;
+import com.Airtickets.Inaplane.persistence.types.TicketTypeClass;
 import com.Airtickets.Inaplane.security.UserDetail;
+import com.Airtickets.Inaplane.util.SecurityUtil;
 import com.Airtickets.Inaplane.util.UserValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,10 +15,11 @@ import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/booking")
@@ -32,38 +36,20 @@ public class BookingController {
 
     @GetMapping("/ticket")
     public String bookTicket(@RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
-                             @RequestParam(value = "time_ticket") String time,  @ModelAttribute("model") UserBookingTicketDTO model,
-                             @AuthenticationPrincipal UserDetail userDetail, @CurrentSecurityContext SecurityContext context){
+                             @RequestParam(value = "time_ticket") String time,  Model model){
         try{
 
             //LocalDate dateTicket = LocalDate.parse(date);
             var ticket = ticketsFacade.getTicketById(id);
-
-            model.timeBookingTicket = time;
-            model.dateBookingTicket = date;
-            model.cityFrom = ticket.cityFrom;
-            model.countryFrom = ticket.countryFrom;
-            model.city_to = ticket.city_to;
-            model.country_to = ticket.country_to;
-            model.currency = ticket.currency;
-            model.price = ticket.price;
-            model.time_in = ticket.time_in;
-            model.id = ticket.id;
-
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-            UserDetail detail = (UserDetail) authentication.getPrincipal();
-            var ite = detail.getUsername();
-
-            if (ite == null){
+            var name = SecurityUtil.getUsername();
+            if (name == null){
                 return "redirect:/auth/login";
             }
-            var name = SecurityContextHolder.getContext().getAuthentication();
-            var user = userFacade.loadUserByUsername(name.getName());
-            model.userDTO = new UserDTO(user.userId, user.fullName,
-                    user.placeNumber, user.email, user.typeClass,
-                    user.finalPrice, user.role);
-
+            var user = userFacade.loadUserByUsername(name);
+            UserBookingTicketDTO bookingTicket = new UserBookingTicketDTO(ticket, user);
+            bookingTicket.timeBookingTicket = time;
+            bookingTicket.dateBookingTicket = date;
+            model.addAttribute("userBooking", bookingTicket);
         }
         catch (Exception e){
             System.out.println(e);
@@ -71,5 +57,56 @@ public class BookingController {
 
         return "catalog/booking";
     }
+
+    @PostMapping("/ticket")
+    public String creatingUserTicket(@RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
+                                     @RequestParam(value = "time_ticket") String time,  @RequestParam(value = "age_ticket") String age,
+                                     @RequestParam(value = "type_ticket") String type){
+        TicketsDTO ticket = ticketsFacade.getTicketById(id);
+        var name = SecurityUtil.getUsername();
+        if (name == null){
+            return "redirect:/auth/login";
+        }
+        var user = userFacade.loadUserByUsername(name);
+        UserBookingTicketDTO bookingTicket = new UserBookingTicketDTO(ticket, user);
+        bookingTicket.timeBookingTicket = time;
+        bookingTicket.dateBookingTicket = date;
+
+        bookingTicket.userDTO.ageTicket = AgeTicket.valueOf(age);
+        bookingTicket.userDTO.typeClass = TicketTypeClass.valueOf(type);
+        int place = userFacade.setPlaceNumber(bookingTicket);
+
+        if(place <= 0){
+            return "redirect:/error";
+        }
+        bookingTicket.userDTO.placeNumber = place;
+        userFacade.addTicketUser(bookingTicket);
+        return "redirect:/booking/profile";
+    }
+    @GetMapping("/profile")
+    public String profilePage(@ModelAttribute("profile") ProfileList model){
+        var name = SecurityUtil.getUsername();
+        if (name == null){
+            return "redirect:/auth/login";
+        }
+        var user = userFacade.getUserTickets(name);
+        model.setTicket(user);
+        return "profile";
+    }
+    @GetMapping("/remove_ticket")
+    public String removeBookingTicketPage(@ModelAttribute("profile") ProfileList model){
+        var name = SecurityUtil.getUsername();
+        if (name == null){
+            return "redirect:/auth/login";
+        }
+        var user = userFacade.getUserTickets(name);
+        model.setTicket(user);
+        return "/catalog/remove_booking_ticket";
+    }
+     @PostMapping("/remove_ticket")
+        public String removeTicket(@RequestParam(value = "ticket") Long id){
+            userFacade.deleteUserTicket(id);
+            return "redirect:/booking/profile";
+        }
 
 }

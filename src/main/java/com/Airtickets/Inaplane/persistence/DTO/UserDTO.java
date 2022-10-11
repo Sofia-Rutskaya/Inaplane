@@ -1,6 +1,7 @@
 package com.Airtickets.Inaplane.persistence.DTO;
 
 import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
+import com.Airtickets.Inaplane.persistence.types.AgeTicket;
 import com.Airtickets.Inaplane.persistence.types.Currency;
 import com.Airtickets.Inaplane.persistence.types.TicketTypeClass;
 
@@ -12,12 +13,13 @@ public class UserDTO {
     public String email;
     public TicketTypeClass typeClass;
     public double finalPrice;
+    public AgeTicket ageTicket;
     public String role;
 
     public UserDTO(Long userId, String fullName,
                    int placeNumber, String email,
                    TicketTypeClass typeClass,
-                   double finalPrice, String role) {
+                   double finalPrice, String role, AgeTicket age) {
         this.userId = userId;
         this.fullName = fullName;
         this.placeNumber = placeNumber;
@@ -25,6 +27,7 @@ public class UserDTO {
         this.typeClass = typeClass;
         this.finalPrice = finalPrice;
         this.role = role;
+        this.ageTicket = age;
     }
 
     public UserDTO(RegisteredUser user) {

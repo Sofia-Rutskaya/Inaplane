@@ -43,7 +43,7 @@ public class TicketsService implements ITicketsService {
 
      @Override
         public Long getTicket(String cityFrom, String cityTo, LocalDate datatime) {
-            var ticket = _ticketRepository.findAll();
+        var ticket = _ticketRepository.findAll();
          for (Tickets item: ticket) {
 
              if(item.getFrom().getCityFrom().equals(cityFrom)

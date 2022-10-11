@@ -44,7 +44,7 @@ public class Plane extends BaseEntity {
     @Column(name = "free_places")
     public int allCountPlaces;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id")
     private Tickets ticket;
 

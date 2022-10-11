@@ -7,27 +7,43 @@
 <body>
 <label>Booking Page</label>
 
-<form  th:object="${model}" th:action="@{/booking/ticket}">
-    <td th:text="${model.countryFrom}"></td>
-    <td th:text="${model.cityFrom}"></td>
+<form  th:object="${userBooking}" th:action="@{'/booking/ticket?id_ticket=' + ${userBooking.id} +'&date_ticket='
++ ${userBooking.dateBookingTicket} +'&time_ticket=' + ${userBooking.timeBookingTicket}}" th:method="POST">
+    <td  th:text="${userBooking.countryFrom}"></td>
+    <td th:text="${userBooking.cityFrom}" th:field="${userBooking.cityFrom}"></td>
 
-    <td th:text="${model.country_to}"></td>
-    <td th:text="${model.city_to}"></td>
+    <td th:text="${userBooking.country_to}" th:field="${userBooking.country_to}"></td>
+    <td th:text="${userBooking.city_to}"></td>
     <br>
-    <td th:text="${model.dateBookingTicket}"></td>
-    <td th:text="${model.timeFrom}"></td>
+    <td th:field="*{dateBookingTicket}"  th:text="${userBooking.getDateBookingTicket()}"></td>
+    <td  th:field="*{timeBookingTicket}" th:text="${userBooking.timeBookingTicket}"></td>
+    <br>
+    <td th:text="${userBooking.time_in}"></td>
+    <td th:text="${userBooking.price}"></td>
+    <td th:text="${userBooking.currency}"></td>
 
-    <td th:text="${model.time_in}"></td>
-    <td th:text="${model.price}"></td>
-    <td th:text="${model.currency}"></td>
+    <br>
+    <select   th:name="type_ticket">
+        <option th:each="state : ${T(com.Airtickets.Inaplane.persistence.types.TicketTypeClass).values()}"
+                th:value="${state}"
+                th:text="${state.title}" >
 
+        </option>
+    </select>
+
+    <select  th:name="age_ticket" >
+        <option th:each="state : ${T(com.Airtickets.Inaplane.persistence.types.AgeTicket).values()}"
+                th:value="${state.toString()}"
+                th:text="${state.title}">
+        </option>
+    </select>
     <br>
 
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-    <td th:field="*{userDTO.fullName}" th:text="${model.getUserDTO().fullName}"></td>
+    <td th:field="${userBooking.userDTO.fullName}" th:text="${userBooking.getUserDTO().fullName}"></td>
 
-    <td th:text="${model.userDTO.email}"></td>
-
+    <td th:text="${userBooking.userDTO.email}"></td>
+<input type="submit" text="Continue >">
 </form>
 </body>
 </html>

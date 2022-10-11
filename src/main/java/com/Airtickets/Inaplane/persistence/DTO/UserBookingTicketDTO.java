@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public class UserBookingTicketDTO extends TicketsDTO{
     public UserDTO userDTO;
-    public UserBookingTicketDTO(Tickets tickets, UserDTO userDTO) {
+    public UserBookingTicketDTO(TicketsDTO tickets, UserDTO userDTO) {
         super(tickets);
         this.userDTO = userDTO;
     }

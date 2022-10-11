@@ -1,15 +1,13 @@
 package com.Airtickets.Inaplane.persistence.types;
 
-public enum TicketTypeClass {
+public enum AgeTicket {
 
-
-    FIRST_CLASS ("First class"),
-    BUSINESS_CLASS ("Business class"),
-    ECONOMY_CLASS ("Economy class");
+    ADULT("Adult"),
+    CHILD ("Child");
 
     private String title;
 
-    TicketTypeClass(String title) {
+    AgeTicket(String title) {
         this.title = title;
     }
 

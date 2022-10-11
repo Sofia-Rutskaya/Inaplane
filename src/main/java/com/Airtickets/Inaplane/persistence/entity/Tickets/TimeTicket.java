@@ -25,8 +25,19 @@ public @Data class TimeTicket extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Override
+    public String toString() {
+        return "TimeTicket{" +
+                "id=" + id +
+                ", dateFrom=" + dateFrom +
+                ", timeFrom=" + timeFrom +
+                '}';
+    }
+
     @Column(name = "date_from")
     public LocalDate dateFrom;
     @Column(name = "time_from")
     public LocalTime timeFrom;
+    @OneToOne(mappedBy = "times", cascade = CascadeType.ALL)
+    private UsersTicket usersTicket;
 }
