@@ -14,7 +14,7 @@ import java.util.List;
 
 public @Data class TicketsDTO extends BaseDTO{
     public Long id;
-    public Time time_in;
+    public String time_in;
     public double price;
     public Currency currency;
 
@@ -25,7 +25,7 @@ public @Data class TicketsDTO extends BaseDTO{
     public String countryFrom;
     public String cityFrom;
     public List<String> dateFrom ;
-    public String dateBookingTicket ;
+    public String dateBookingTicket;
     public String timeBookingTicket;
     public List<String> timeFrom;
 
@@ -40,7 +40,7 @@ public @Data class TicketsDTO extends BaseDTO{
         setCurrency(tickets.getCurrency());
         setCityFrom(tickets.getFrom().cityFrom);
         setCity_to(tickets.getCityTo().cityTo);
-        setTime_in(tickets.getTimeIn());
+        setTime_in(tickets.getTimeIn().toString());
         setPrice(tickets.getPrice());
         setCountryFrom(tickets.getFrom().countryFrom);
         setCountry_to(tickets.getCityTo().countryTo);

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <th>Country From</th>
+        <th>City From</th>
+        <th>Country To</th>
+        <th>City To</th>
+        <th>Date Time</th>
+        <th>Flight time</th>
+        <th>Plane Name</th>
+        <th>All places</th>
+        <th>First places</th>
+        <th>Business places</th>
+        <th>Economy places</th>
+        <th>Price</th>
+        <th>Currency</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="ticket : ${model.tickets}">
+    <form th:action="@{'/catalog/remove_ticket/' + ${ticket.getTicketsDTO().id}}" method="post">
+
+        <td th:text="${ticket.getTicketsDTO().countryFrom}"></td>
+        <th th:text="${ticket.getTicketsDTO().cityFrom}"></th>
+        <th th:text="${ticket.getTicketsDTO().country_to}"></th>
+        <th th:text="${ticket.getTicketsDTO().city_to}"></th>
+        <th>
+            <a th:href="@{'/catalog/time_ticket/' + ${ticket.getTicketsDTO().id}}" type="button"> Time </a>
+        </th>
+        <th th:text="${ticket.getTicketsDTO().time_in}"></th>
+        <th th:text="${ticket.getPlanes().planeName}"></th>
+        <th th:text="${ticket.getPlanes().allCountPlaces}"></th>
+        <th th:text="${ticket.getPlanes().firstFreePlaces}"></th>
+        <th th:text="${ticket.getPlanes().businessFreePlaces}"></th>
+        <th th:text="${ticket.getPlanes().economyFreePlaces}"></th>
+        <th th:text="${ticket.getTicketsDTO().price}"></th>
+        <th th:text="${ticket.getTicketsDTO().currency}"></th>
+        <th><input type="submit" th:value="Delete"></input></th>
+
+
+    </form>
+
+    </tr>
+</table>
+</body>
+</html>

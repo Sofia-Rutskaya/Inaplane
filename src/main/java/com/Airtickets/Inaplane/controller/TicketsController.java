@@ -1,14 +1,14 @@
 package com.Airtickets.Inaplane.controller;
 import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
-import com.Airtickets.Inaplane.persistence.DTO.CityTicketDTO;
-import com.Airtickets.Inaplane.persistence.DTO.TicketsDTO;
+import com.Airtickets.Inaplane.persistence.DTO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/catalog")
@@ -59,5 +59,44 @@ class TicketsController {
          //var ticket = ticketsFacade.getAllTickets();
         return "redirect:/booking/ticket?id_ticket=" + id +"&date_ticket=" + date +"&time_ticket=" + time;
     }
+    @RequestMapping(value = "/add_ticket", method = RequestMethod.GET)
+    public String addTicketPage(@ModelAttribute("model") TicketsDTO model, @ModelAttribute("plane") PlaneDTO plane){
+        return "admin/add_ticket";
+    }
+    @PostMapping(value = "/add_ticket")
+    public String addTicket(@ModelAttribute("model") TicketsDTO model, @ModelAttribute("plane") PlaneDTO plane){
+        ticketsFacade.createTicket(model, plane);
+        return "redirect:/catalog/add_ticket";
+    }
+    @GetMapping("/remove_ticket")
+    public String deleteTicketPage(@ModelAttribute("model") RemoveTicketList model){
+
+        var tickets = ticketsFacade.getAllTickets();
+        var plane= ticketsFacade.getAllPlanes();
+        model.tickets = new ArrayList<>();
+        for( int i = 0 ; i< tickets.size(); i++){
+            RemoveTicketsDto ticketsDto = new RemoveTicketsDto(tickets.get(i), plane.get(i));
+            model.tickets.add(ticketsDto);
+        }
+        return "/admin/remove_ticket";
+    }
+     @PostMapping("/remove_ticket/{id}")
+        public String deleteTicket(@PathVariable Long id, @ModelAttribute("model") RemoveTicketList model){
+         var ticket = ticketsFacade.getTicketById(id);
+        ticketsFacade.deleteTickets(ticket);
+
+        return "/admin/remove_ticket";
+        }
+
+     @GetMapping("/time_ticket/{id}")
+     public String timeTicketPage(@PathVariable Long id, @ModelAttribute("model") TimeList model){
+        var ticket = ticketsFacade.getTicketById(id);
+        model.times = new ArrayList<>();
+        for(int i = 0; i< ticket.timeFrom.size(); i++){
+            model.times.add(new TimeDTO(ticket.timeFrom.get(i), ticket.dateFrom.get(i)));
+        }
+        return "/admin/time_ticket";
+    }
+
 
 }

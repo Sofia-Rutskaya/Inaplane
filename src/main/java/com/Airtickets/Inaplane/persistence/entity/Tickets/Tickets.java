@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalTime;
 
 
 @Getter
@@ -14,7 +15,7 @@ import java.sql.Time;
 @Entity
 @Table(name = "tickets")
 public class Tickets extends BaseEntity {
-    public Tickets(Long id, Time timeIn) {
+    public Tickets(Long id, LocalTime timeIn) {
         this.id = id;
         this.timeIn = timeIn;
     }
@@ -24,7 +25,7 @@ public class Tickets extends BaseEntity {
     public Long id;
 
     @Column(name = "time_in", nullable = false)
-    public Time timeIn;
+    public LocalTime timeIn;
 
     @Column(name = "price", nullable = false)
     public double price;

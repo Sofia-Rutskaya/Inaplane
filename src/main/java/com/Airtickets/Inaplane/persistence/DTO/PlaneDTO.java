@@ -1,10 +1,17 @@
 package com.Airtickets.Inaplane.persistence.DTO;
 
 import com.Airtickets.Inaplane.persistence.entity.Tickets.Plane;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 
+@Getter
+@Setter
 public class PlaneDTO extends BaseDTO {
+    public PlaneDTO() {
+    }
+
     public Long id;
 
     public String planeName;

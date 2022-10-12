@@ -17,7 +17,7 @@ import java.time.LocalTime;
 @Setter
 public class ProfileTicket extends BaseDTO{
     public Long id;
-    public Time time_in;
+    public LocalTime time_in;
     public double price;
     public Currency currency;
 

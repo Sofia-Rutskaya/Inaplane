@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form  th:action="@{/catalog/add_ticket}" method="post">
+    <input type="text" th:field="${model.countryFrom}"  placeholder="Country From">
+    <input type="text" th:field="${model.cityFrom}"  placeholder="City From">
+    <input type="text" th:field="${model.country_to}"  placeholder="Country To">
+    <input type="text" th:field="${model.city_to}"  placeholder="City To">
+    <br>
+
+    <input type="time" th:field="${model.timeBookingTicket}"  placeholder="Time">
+    <input type="date" th:field="${model.dateBookingTicket}"  placeholder="Date">
+    <input type="time" th:field="${model.time_in}"  placeholder="Flight hour">
+    <br>
+
+    <input type="text" th:field="${plane.planeName}"  placeholder="Plane Name">
+    <input type="text" th:field="${plane.allCountPlaces}"  placeholder="First places">
+    <input type="text" th:field="${plane.firstFreePlaces}"  placeholder="First places">
+    <input type="text" th:field="${plane.businessFreePlaces}"  placeholder="Business places">
+    <input type="text" th:field="${plane.economyFreePlaces}"  placeholder="Economy places">
+    <br>
+
+    <input type="text" th:field="${model.price}"  placeholder="Price">
+    <input type="text" th:field="${model.currency}"  placeholder="Currency">
+    <input type="submit" th:text="Save">
+</form>
+</body>
+</html>

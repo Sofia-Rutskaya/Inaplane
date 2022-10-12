@@ -22,4 +22,13 @@ public class TimeService implements ITimeService {
     public List<TimeTicket> getAll(){
         return timeRepository.findAll();
     }
+
+    public void create(TimeTicket ticket){
+        timeRepository.save(ticket);
+    }
+    public void deleteById(Long id){
+        timeRepository.deleteById(id);
+    }
+
+
 }
