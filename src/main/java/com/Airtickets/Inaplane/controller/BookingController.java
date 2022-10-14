@@ -53,6 +53,7 @@ public class BookingController {
         }
         catch (Exception e){
             System.out.println(e);
+            return "redirect:/auth/login";
         }
 
         return "catalog/booking";

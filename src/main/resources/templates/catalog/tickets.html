@@ -2,29 +2,165 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tickets</title>
 </head>
 <body>
-<label>TICKET PAGE</label>
 
-    <th:block  th:each="items, state : ${model.getTimeFrom()}" >
+<nav class="navbar">
+    <!-- LOGO -->
+    <div class="logo">INAPLANE</div>
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/auth/login">Log In</a></li>
+            <li>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form></li>
+            <li><a href="/">Profile</a></li>
+            <li><a href="/">Contact</a></li>
+        </div>
+    </ul>
+</nav>
 
-     <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${model.dateBookingTicket} +'&time_ticket=' + ${items}}" th:method="POST">
+<div style="color: black; margin: 5% 10% 7% 10%;">
+    <h1 style="text-align: center">WELCOME TO INAPLANE</h1>
+    <h4 style="text-align: center">BOOKING TICKET</h4>
+</div>
+<div>
+    <img src="https://cdn-icons-png.flaticon.com/512/860/860790.png" style="height: 50px; width: 50px;">
+    <a th:href="@{/home}">Back</a>
+</div>
 
-         <td th:text="${state.count} "></td>
 
-         <td th:field="*{id}" th:text="${model.id} " >
-         <td th:field="*{dateBookingTicket}"  th:text="${model.dateFrom} "></td>
-        <td th:field="*{timeFrom}" th:text="${items}" name="${items}"></td>
+<div class="container middle-item ">
+    <div class=" ticket-place">
 
-         <td th:text="${model.cityFrom}"></td>
-         <td th:text="${model.city_to}"></td>
-         <td   th:text="${model.price}" ></td>
-         <td  th:text="${model.currency}" ></td>
-         <input type="submit">
-    </form>
-    </th:block>
+        <th:block  th:each="items, state : ${model.getTimeFrom()}" >
 
+                <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${model.dateBookingTicket} +'&time_ticket=' + ${items}}" th:method="POST">
+                    <div class=" air-ticket">
+                        <label>From   </label>
+                    <td th:text="${model.cityFrom}"></td>
+                        <label>To   </label>
+                    <td th:text="${model.city_to}"></td>
+                        <br>
+                        <label>Date:   </label>
+                    <td th:field="*{dateBookingTicket}"  th:text="${model.dateBookingTicket} "></td>
+                        <label>Time:   </label>
+                    <td th:field="*{timeFrom}" th:text="${items}" name="${items}"></td>
+                        <br>
+                    <td th:text="${model.price}" ></td>
+                    <td th:text="${model.currency}" ></td>
+                    </div>
+                    <div row air-ticket>
+                        <button class="button-buy-ticket" type="submit">BUY</button>
+                    </div>
+
+                </form>
+
+
+        </th:block>
+
+    </div>
+
+
+</div>
 
 </body>
 </html>
+
+<style>
+
+    body{
+        background-image: url("https://images.pexels.com/photos/1655985/pexels-photo-1655985.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .middle-item{
+        column-count: 1;
+    }
+
+    .button-buy-ticket{
+        text-align: right;
+        margin: 0% 20% 0% 22%;
+        padding: 2% 25% 2% 25%;
+        color: #c6cfe1;
+        border-radius: 1.5rem;
+        box-shadow: none;
+        font-size: 155%;
+        border-color: #2674e8;
+        background-color: #2674e8;
+    }
+    .air-ticket{
+        margin: 1% 5% 0% 5%;
+        background-color: #ffffff;
+        padding: 1% 1% 1% 5%;
+        text-align: center;
+        color: #2674e8;
+        font-size: 200%;
+        border-radius: 2rem;
+    }
+
+    .navbar {
+        margin: -1%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color:  #2674e8;
+        color: #fff;
+    }
+    .nav-links a {
+        color: #fff;
+    }
+    /* LOGO */
+    .logo {
+        font-size: 32px;
+    }
+    /* NAVBAR MENU */
+    .menu {
+        display: flex;
+        gap: 1em;
+        font-size: 18px;
+    }
+    .menu li:hover {
+        background-color: #38609b;
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+    .menu li {
+        padding: 5px 14px;
+    }
+    /* DROPDOWN MENU */
+    .services {
+        position: relative;
+    }
+    .dropdown {
+        background-color:  #2674e8;
+        padding: 1em 0;
+        position: absolute; /*WITH RESPECT TO PARENT*/
+        display: none;
+        border-radius: 8px;
+        top: 35px;
+    }
+    .dropdown li + li {
+        margin-top: 10px;
+    }
+    .dropdown li {
+        padding: 0.5em 1em;
+        width: 8em;
+        text-align: center;
+    }
+    .dropdown li:hover {
+        background-color: #2f3a69;
+    }
+    .services:hover .dropdown {
+        display: block;
+    }
+
+</style>

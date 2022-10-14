@@ -1,0 +1,23 @@
+.form-AddTicket {
+
+    color: #000;
+    background-color: #fff;
+    border:2px solid #99c950;
+    outline: 0;
+    box-shadow: none;
+
+}
+
+.btn{
+    padding: 0.6rem 1.2rem;
+    background: #5771da;
+    border: 2px solid #4951bb;
+}
+.btn-primary:hover {
+
+
+    background-color: #8ca8df;
+    border-color: #717bb9;
+    transition: .3s;
+
+}
