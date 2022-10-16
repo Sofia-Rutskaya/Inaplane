@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TicketsService implements ITicketsService {

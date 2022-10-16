@@ -21,19 +21,19 @@
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                     <input hidden type="submit" value="Sign Out"/>
                 </form></li>
-            <li><a href="/">Profile</a></li>
+            <li><a href="/booking/profile">Profile</a></li>
             <li><a href="/">Contact</a></li>
         </div>
     </ul>
 </nav>
 
-<div style="color: black; margin: 5% 10% 7% 10%;">
+<div style="color: white; margin: 5% 10% 7% 10%;">
     <h1 style="text-align: center">WELCOME TO INAPLANE</h1>
     <h4 style="text-align: center">BOOKING TICKET</h4>
 </div>
 <div>
-    <img src="https://cdn-icons-png.flaticon.com/512/860/860790.png" style="height: 50px; width: 50px;">
-    <a th:href="@{/home}">Back</a>
+
+    <a style="margin: 0% 10% 0% 10%" th:href="@{/home}"><img src="https://cdn-icons-png.flaticon.com/512/860/860790.png" style="height: 50px; width: 50px;"></a>
 </div>
 
 
@@ -77,7 +77,7 @@
 <style>
 
     body{
-        background-image: url("https://images.pexels.com/photos/1655985/pexels-photo-1655985.jpeg");
+        background-image: url("https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg");
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -88,7 +88,7 @@
     .button-buy-ticket{
         text-align: right;
         margin: 0% 20% 0% 22%;
-        padding: 2% 25% 2% 25%;
+        padding: 0% 25% 0% 25%;
         color: #c6cfe1;
         border-radius: 1.5rem;
         box-shadow: none;

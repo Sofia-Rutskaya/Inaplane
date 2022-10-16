@@ -12,10 +12,11 @@
   <br>
   <br>
   <br>
+  <div>
+    <h2 style="color: white" class="card-title text-center">Registration</h2></div>
   <div class="row justify-content-center">
     <div class="col-md-5">
       <div class="card">
-        <h2 class="card-title text-center">Registration</h2>
         <div class="card card-body">
 
           <form _lpchecked="1" th:method="POST" th:object="${user}" th:action="@{/auth/registration}">
@@ -47,3 +48,11 @@
 
 </body>
 </html>
+
+<style>
+  body{
+    background-image: url("https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+</style>

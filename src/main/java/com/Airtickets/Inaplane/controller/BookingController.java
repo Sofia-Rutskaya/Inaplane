@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/booking")
@@ -86,6 +87,9 @@ public class BookingController {
     }
     @GetMapping("/profile")
     public String profilePage(@ModelAttribute("profile") ProfileList model){
+        if(model.ticket == null){
+            return "redirect:/auth/login";
+        }
         var name = SecurityUtil.getUsername();
         if (name == null){
             return "redirect:/auth/login";

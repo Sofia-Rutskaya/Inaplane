@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 @Service
 public class TicketsFacade implements ITicketsFacade {
@@ -136,6 +137,7 @@ public class TicketsFacade implements ITicketsFacade {
     public List<CityFromDTO> getAllCityFrom (){
         var city = fromService.getAllItem();
         List<CityFromDTO> items = city.stream().map(CityFromDTO:: new).collect(Collectors.toList());
+
         return items;
     }
 
