@@ -87,9 +87,7 @@ public class BookingController {
     }
     @GetMapping("/profile")
     public String profilePage(@ModelAttribute("profile") ProfileList model){
-        if(model.ticket == null){
-            return "redirect:/auth/login";
-        }
+
         var name = SecurityUtil.getUsername();
         if (name == null){
             return "redirect:/auth/login";

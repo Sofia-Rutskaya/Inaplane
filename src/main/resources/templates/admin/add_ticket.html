@@ -36,46 +36,51 @@
         <form class="form-AddTicket"  th:action="@{/catalog/add_ticket}" method="post">
         <div >
             <h3>CITY MODEL</h3>
-            <label>All places</label>
+            <label>Country From: </label>
             <input type="text" th:field="${model.countryFrom}"  placeholder="Country From">
-            <label>All places</label>
+            <label>City From: </label>
             <input type="text" th:field="${model.cityFrom}"  placeholder="City From">
-            <label>All places</label>
+            <br>
+            <label>Country To: </label>
             <input type="text" th:field="${model.country_to}"  placeholder="Country To">
-            <label>All places</label>
+            <label>City To: </label>
             <input type="text" th:field="${model.city_to}"  placeholder="City To">
         </div>
         <div >
             <h3>TIME TABLE</h3>
-            <label>All places</label>
+            <label>Time: </label>
             <input type="time" th:field="${model.timeBookingTicket}"  placeholder="Time">
-            <label>All places</label>
-            <input type="date" th:field="${model.dateBookingTicket}"  placeholder="Date">
-            <label>All places</label>
+            <div style="width: 250px;     margin: 1% 5% 1% 36%;">
+
+                <label>Date: </label>
+                <input style="width: 100%; height: 2.3rem;" type="date" th:field="${model.dateBookingTicket}"  placeholder="Date">
+            </div>
+            <label>Flight hour: </label>
             <input type="time" th:field="${model.time_in}"  placeholder="Flight hour">
-            <label>All places</label>
+            <label>Plane Name: </label>
             <input type="text" th:field="${plane.planeName}"  placeholder="Plane Name">
         </div>
-        <div class="col-sm-4">
+        <div >
             <h3>PLANE PLACES</h3>
-            <p>All places</p>
+            <label>All places: </label>
             <input type="text" th:field="${plane.allCountPlaces}"  placeholder="All places">
-            <p>First places</p>
-            <input type="text" th:field="${plane.firstFreePlaces}"  placeholder="First places">
-            <p>Business places</p>
+            <label>Business places: </label>
             <input type="text" th:field="${plane.businessFreePlaces}"  placeholder="Business places">
-            <p>Economy places</p>
+            <br>
+            <label>First places: </label>
+            <input type="text" th:field="${plane.firstFreePlaces}"  placeholder="First places">
+            <label>Economy places: </label>
             <input type="text" th:field="${plane.economyFreePlaces}"  placeholder="Economy places">
         </div>
-        <div class="col-sm-4">
+        <div >
             <h3>PRICE</h3>
-            <p>All places</p>
+            <label>Price: </label>
             <input type="text" th:field="${model.price}"  placeholder="Price">
-            <p>All places</p>
+            <label>Currency: </label>
             <input type="text" th:field="${model.currency}"  placeholder="Currency"></div>
         <div class="col-sm-4"></div>
         <div  class="form-group pt-1">
-            <button class="btn btn-primary" type="submit">Save</button>
+            <button style=" margin: 5% 5% 1% 5%;  padding: 2% 15% 2% 15%;" class="btn btn-primary" type="submit">Save</button>
         </div>
 
 
@@ -91,6 +96,9 @@
 
 <style>
     .Item-add{
+
+        background-color: white;
+        border-radius: 2rem;
         text-align: center;
         margin: 5% 5% 5% 15%;
         align-items: center;
