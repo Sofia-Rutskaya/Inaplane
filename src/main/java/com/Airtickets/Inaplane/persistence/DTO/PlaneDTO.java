@@ -35,11 +35,11 @@ public class PlaneDTO extends BaseDTO {
     }
 
     public PlaneDTO(Plane plane) {
-        this.id = plane.id;
-        this.planeName = plane.planeName;
-        this.businessFreePlaces = plane.businessFreePlaces;
-        this.firstFreePlaces = plane.firstFreePlaces;
-        this.economyFreePlaces = plane.economyFreePlaces;
-        this.allCountPlaces = plane.allCountPlaces;
+        this.id = plane.getId();
+        this.planeName = plane.getPlaneName();
+        this.businessFreePlaces = plane.getBusinessFreePlaces();
+        this.firstFreePlaces = plane.getFirstFreePlaces();
+        this.economyFreePlaces = plane.getEconomyFreePlaces();
+        this.allCountPlaces = plane.getAllCountPlaces();
     }
 }

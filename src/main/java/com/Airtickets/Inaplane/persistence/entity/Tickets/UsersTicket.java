@@ -19,28 +19,25 @@ public class UsersTicket extends BaseEntity {
     private Long id;
 
     @Column(name = "place_number")
-    public int placeNumber;
+    private int placeNumber;
 
     @Enumerated(EnumType.STRING)
-    public TicketTypeClass typeClass;
+    private TicketTypeClass typeClass;
 
     @Enumerated(EnumType.STRING)
-    public AgeTicket ageTicket;
+    private AgeTicket ageTicket;
 
     @Column(name = "price")
-    public double price;
+    private double price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "currency")
-    public Currency currency;
+    private Currency currency;
 
     @Column(name = "active")
-    public boolean active;
+    private boolean active;
 
     @Column(name = "ticket_id")
-    public Long ticket;
+    private Long ticket;
 
-    @OneToOne
-    @JoinColumn(name = "date_ticket_id")
-    private TimeTicket times;
 }

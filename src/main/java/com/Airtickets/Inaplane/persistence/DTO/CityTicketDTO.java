@@ -8,7 +8,6 @@ import java.util.List;
 @Data
 public class CityTicketDTO extends BaseDTO{
     Long id;
-    List<String> cityFromList;
-    List<String> cityToList;
+    List<String> cityList;
     String dataTime;
 }

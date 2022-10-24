@@ -1,4 +1,4 @@
-package com.Airtickets.Inaplane.service;
+package com.Airtickets.Inaplane.service.interfaces;
 
 import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
 import com.Airtickets.Inaplane.persistence.repository.UserRepo.IUserRepository;

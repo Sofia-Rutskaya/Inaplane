@@ -1,41 +1,39 @@
 package com.Airtickets.Inaplane.controller;
 
-import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
-import com.Airtickets.Inaplane.persistence.DTO.CityFromDTO;
+import com.Airtickets.Inaplane.facade.TicketsFacade;
 import com.Airtickets.Inaplane.persistence.DTO.CityTicketDTO;
-import com.Airtickets.Inaplane.persistence.DTO.CityToDTO;
 import com.Airtickets.Inaplane.security.UserDetail;
 import com.Airtickets.Inaplane.util.SecurityUtil;
-import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class HomeController {
-    private final ITicketsFacade ticketsFacade;
+    private final TicketsFacade ticketsFacade;
 
-    public HomeController( ITicketsFacade iTicketsFacade) {
-        this.ticketsFacade = iTicketsFacade;
+    public HomeController( TicketsFacade ticketsFacade) {
+        this.ticketsFacade = ticketsFacade;
     }
 
     @GetMapping("/home")
     public String homePage(@ModelAttribute("model") CityTicketDTO model){
         List<String> cityFromList = new ArrayList<>();
         List<String> cityToList = new ArrayList<>();
-        for (CityFromDTO item: ticketsFacade.getAllCityFrom()) {
+
+        var ticket = ticketsFacade.getAllTickets();
+
+        var time = ticketsFacade.getAllPlanes();
+       /* for (CityFromDTO item: ticketsFacade.getAllCityFrom()) {
             cityFromList.add(item.cityFrom);
         }
         for (CityToDTO item: ticketsFacade.getAllCityTo()) {
@@ -43,7 +41,7 @@ public class HomeController {
         }
 
         model.setCityToList(cityToList);
-        model.setCityFromList(cityFromList);
+        model.setCityFromList(cityFromList);*/
         return "home";
     }
 
@@ -51,10 +49,11 @@ public class HomeController {
     @PostMapping("/home")
     public String FilterTicket(@ModelAttribute("model") CityTicketDTO model){
         LocalDate date = LocalDate.parse(model.getDataTime());
-        var id = ticketsFacade.getTicket(model.getCityFromList().stream().findFirst().get(), model.getCityToList().stream().findFirst().get(), date);
-        if(id == null){
-            return "redirect:/home?error";
-        }
+        Long id = 1l;
+       // var id = ticketsFacade.getTicket(model.getCityFromList().stream().findFirst().get(), model.getCityToList().stream().findFirst().get(), date);
+       // if(id == null){
+         //   return "redirect:/home?error";
+        //}
         return "redirect:/catalog/tickets?id_ticket=" + id +"&date_ticket=" + date;
     }
     @GetMapping("/showUserInfo")

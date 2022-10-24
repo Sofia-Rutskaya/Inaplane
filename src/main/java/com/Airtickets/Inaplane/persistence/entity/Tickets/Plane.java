@@ -26,26 +26,26 @@ public class Plane extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "plane_name")
-    public String planeName;
+    private String planeName;
 
 
     @Column(name = "business_free_places")
-    public int businessFreePlaces;
+    private int businessFreePlaces;
 
     @Column(name = "first_free_places")
-    public int firstFreePlaces;
+    private int firstFreePlaces;
 
     @Column(name = "economy_free_places")
-    public int economyFreePlaces;
+    private int economyFreePlaces;
 
     @Column(name = "free_places")
-    public int allCountPlaces;
+    private int allCountPlaces;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id")
+    @OneToOne(mappedBy = "plane", cascade = CascadeType.ALL)
     private Tickets ticket;
 
     public Plane() {

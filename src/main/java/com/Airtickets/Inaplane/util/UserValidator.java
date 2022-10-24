@@ -2,7 +2,7 @@ package com.Airtickets.Inaplane.util;
 
 
 import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
-import com.Airtickets.Inaplane.service.interfaces.IUserService;
+import com.Airtickets.Inaplane.service.UserService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -10,9 +10,9 @@ import org.springframework.validation.Validator;
 @Component
 public class UserValidator implements Validator {
 
-    private final IUserService userService;
+    private final UserService userService;
 
-    public UserValidator(IUserService userService) {
+    public UserValidator(UserService userService) {
         this.userService = userService;
     }
 

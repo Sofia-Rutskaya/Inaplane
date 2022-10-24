@@ -1,36 +1,25 @@
 package com.Airtickets.Inaplane.controller;
 
-import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
-import com.Airtickets.Inaplane.facade.interfaces.IUserFacade;
+import com.Airtickets.Inaplane.facade.TicketsFacade;
+import com.Airtickets.Inaplane.facade.UserFacade;
 import com.Airtickets.Inaplane.persistence.DTO.*;
-import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
 import com.Airtickets.Inaplane.persistence.types.AgeTicket;
 import com.Airtickets.Inaplane.persistence.types.TicketTypeClass;
-import com.Airtickets.Inaplane.security.UserDetail;
 import com.Airtickets.Inaplane.util.SecurityUtil;
 import com.Airtickets.Inaplane.util.UserValidator;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
-
-import javax.validation.Valid;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/booking")
 public class BookingController {
-    private final ITicketsFacade ticketsFacade;
+    private final TicketsFacade ticketsFacade;
     private final UserValidator userValidator;
-    private  final IUserFacade userFacade;
+    private  final UserFacade userFacade;
 
-    public BookingController(ITicketsFacade iTicketsFacade, UserValidator userValidator, IUserFacade userFacade) {
-        this.ticketsFacade = iTicketsFacade;
+    public BookingController(TicketsFacade ticketsFacade, UserValidator userValidator, UserFacade userFacade) {
+        this.ticketsFacade = ticketsFacade;
         this.userValidator = userValidator;
         this.userFacade = userFacade;
     }

@@ -1,15 +1,9 @@
 package com.Airtickets.Inaplane.persistence.DTO;
-import com.Airtickets.Inaplane.persistence.entity.Tickets.CityFrom;
 import com.Airtickets.Inaplane.persistence.entity.Tickets.Tickets;
-import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
 import com.Airtickets.Inaplane.persistence.types.Currency;
 import lombok.Data;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public @Data class TicketsDTO extends BaseDTO{
@@ -38,19 +32,19 @@ public @Data class TicketsDTO extends BaseDTO{
             return;
         setId(tickets.getId());
         setCurrency(tickets.getCurrency());
-        setCityFrom(tickets.getFrom().cityFrom);
-        setCity_to(tickets.getCityTo().cityTo);
-        setTime_in(tickets.getTimeIn().toString());
+        setCityFrom(tickets.getDepartureAirport().getLocationAirport().getCity());
+        //setCity_to(tickets.getCityTo().cityTo);
+        //setTime_in(tickets.getTimeIn().toString());
         setPrice(tickets.getPrice());
-        setCountryFrom(tickets.getFrom().countryFrom);
-        setCountry_to(tickets.getCityTo().countryTo);
+       // setCountryFrom(tickets.getFrom().countryFrom);
+       // setCountry_to(tickets.getCityTo().countryTo);
         this.timeFrom = new ArrayList<>();
         this.dateFrom = new ArrayList<>();
-        for (TimeTicket date:
-             tickets.getFrom().getTimes()) {
-            this.dateFrom.add(date.getDateFrom().toString());
-            this.timeFrom.add(date.getTimeFrom().toString());
-        }
+       // for (TimeTicket date:
+          //   tickets.getFrom().getTimes()) {
+         //   this.dateFrom.add(date.getDateFrom().toString());
+         //   this.timeFrom.add(date.getTimeFrom().toString());
+       // }
     }
 
     public TicketsDTO(TicketsDTO tickets) {

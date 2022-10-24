@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalTime;
+import java.util.List;
 
 
 @Getter
@@ -15,39 +15,43 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "tickets")
 public class Tickets extends BaseEntity {
-    public Tickets(Long id, LocalTime timeIn) {
+    public Tickets(Long id, LocalTime flightHour) {
         this.id = id;
-        this.timeIn = timeIn;
+        this.flightHour = flightHour;
     }
 
     @Id
+    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    @Column(name = "time_in", nullable = false)
-    public LocalTime timeIn;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "arrival_airport_id")
+    private Airport arrivalAirport;
 
-    @Column(name = "price", nullable = false)
-    public double price;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departure_airport_id")
+    private Airport departureAirport;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "time_id")
+    private Schedule time;
+    @Column(name = "flight_hour")
+    private LocalTime flightHour;
+
+    @Column(name = "price")
+    private double price;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "currency", nullable = false)
-    public Currency currency;
+    @Column(name = "currency")
+    private Currency currency;
 
-
-    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private CityFrom from;
-
-    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "plane_id")
     private Plane plane;
 
 
-
-    @OneToOne(mappedBy = "ticket",  cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private CityTo cityTo;
 
     public Tickets() {
 

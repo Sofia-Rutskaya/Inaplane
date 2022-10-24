@@ -1,34 +1,12 @@
 package com.Airtickets.Inaplane.service;
 
-import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
-import com.Airtickets.Inaplane.persistence.repository.TicketsRepo.ITimeRepository;
-import com.Airtickets.Inaplane.service.interfaces.ITimeService;
-import org.springframework.stereotype.Service;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.Schedule;
 
 import java.util.List;
 
-@Service
-public class TimeService implements ITimeService {
-    private final ITimeRepository timeRepository;
-
-    public TimeService(ITimeRepository timeRepository) {
-        this.timeRepository = timeRepository;
-    }
-
-    public void getTime(Long id){
-        timeRepository.findById(id);
-    }
-
-    public List<TimeTicket> getAll(){
-        return timeRepository.findAll();
-    }
-
-    public void create(TimeTicket ticket){
-        timeRepository.save(ticket);
-    }
-    public void deleteById(Long id){
-        timeRepository.deleteById(id);
-    }
-
-
+public interface TimeService {
+    void getTime(Long id);
+    List<Schedule> getAll();
+    void create(Schedule ticket);
+    void deleteById(Long id);
 }

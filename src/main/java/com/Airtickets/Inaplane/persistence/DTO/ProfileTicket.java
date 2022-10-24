@@ -1,7 +1,6 @@
 package com.Airtickets.Inaplane.persistence.DTO;
 
 import com.Airtickets.Inaplane.persistence.entity.Tickets.Tickets;
-import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
 import com.Airtickets.Inaplane.persistence.entity.Tickets.UsersTicket;
 import com.Airtickets.Inaplane.persistence.types.AgeTicket;
 import com.Airtickets.Inaplane.persistence.types.Currency;
@@ -9,7 +8,6 @@ import com.Airtickets.Inaplane.persistence.types.TicketTypeClass;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -36,19 +34,19 @@ public class ProfileTicket extends BaseDTO{
 
     public ProfileTicket(UsersTicket usersTicket, Tickets tickets) {
         this.setId(usersTicket.getId());
-        this.setTime_in(tickets.timeIn);
-        this.price = usersTicket.price;
-        this.currency = usersTicket.currency;
-        this.country_to = tickets.getCityTo().countryTo;
-        this.city_to = tickets.getCityTo().cityTo;
-        this.countryFrom = tickets.getFrom().countryFrom;
-        this.cityFrom = tickets.getFrom().cityFrom;
-        this.placeNumber = usersTicket.placeNumber;
-        this.typeClass = usersTicket.typeClass;
-        this.finalPrice = usersTicket.price;
-        this.ageTicket = usersTicket.ageTicket;
-        this.dateBookingTicket = usersTicket.getTimes().dateFrom;
-        this.timeBookingTicket = usersTicket.getTimes().timeFrom;
+        this.setTime_in(tickets.getFlightHour());
+        this.price = usersTicket.getPrice();
+        this.currency = usersTicket.getCurrency();
+        //this.country_to = tickets.getCityTo().countryTo;
+        //this.city_to = tickets.getCityTo().cityTo;
+       // this.countryFrom = tickets.getFrom().countryFrom;
+        //this.cityFrom = tickets.getFrom().cityFrom;
+        this.placeNumber = usersTicket.getPlaceNumber();
+        this.typeClass = usersTicket.getTypeClass();
+        this.finalPrice = usersTicket.getPrice();
+        this.ageTicket = usersTicket.getAgeTicket();
+       // this.dateBookingTicket = usersTicket.getTimes().dateFrom;
+       // this.timeBookingTicket = usersTicket.getTimes().timeFrom;
     }
 
 

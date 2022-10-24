@@ -37,13 +37,13 @@
 <form  th:method="POST" th:object="${model}" th:action="@{/home}">
 
 <div class="columns">
-    <select  th:field="${model.cityFromList}" class="form-control" id="dropDownList2">
+    <select  th:field="${model.getCityList()}" class="form-control" id="dropDownList2">
 
-    <option  th:each="option : ${model.cityFromList}" th:value="${option}" th:text="${option}"></option>
+    <option  th:each="option : ${model.getCityList()}" th:value="${option}" th:text="${option}"></option>
 </select>
 
-<select th:field="${model.cityToList}"  class="form-control" id="dropDownList4">
-    <option th:each="option : ${model.cityToList}" th:value="${option}" th:text="${option}"></option>
+<select th:field="${model.getCityList()}"  class="form-control" id="dropDownList4">
+    <option th:each="option : ${model.getCityList()}" th:value="${option}" th:text="${option}"></option>
 </select>
     <div >
     <input  type="date" th:field="${model.dataTime}">

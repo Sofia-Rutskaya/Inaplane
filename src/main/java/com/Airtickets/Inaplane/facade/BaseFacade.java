@@ -1,4 +1,4 @@
-package com.Airtickets.Inaplane.facade.interfaces;
+package com.Airtickets.Inaplane.facade;
 
 import com.Airtickets.Inaplane.persistence.DTO.BaseDTO;
 

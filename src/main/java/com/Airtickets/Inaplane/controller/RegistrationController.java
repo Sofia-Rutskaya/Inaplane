@@ -1,7 +1,7 @@
 package com.Airtickets.Inaplane.controller;
 
 import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
-import com.Airtickets.Inaplane.service.interfaces.IUserService;
+import com.Airtickets.Inaplane.service.UserService;
 import com.Airtickets.Inaplane.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +19,9 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     private final UserValidator userValidator;
-    private final IUserService userService;
+    private final UserService userService;
     @Autowired
-    public RegistrationController(UserValidator userValidator, IUserService userService) {
+    public RegistrationController(UserValidator userValidator, UserService userService) {
         this.userValidator = userValidator;
         this.userService = userService;
     }

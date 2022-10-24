@@ -1,24 +1,22 @@
 package com.Airtickets.Inaplane.controller;
-import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
+import com.Airtickets.Inaplane.facade.TicketsFacade;
 import com.Airtickets.Inaplane.persistence.DTO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/catalog")
 class TicketsController {
     Logger logger = LoggerFactory.getLogger(TicketsController.class);
 
-    private final ITicketsFacade ticketsFacade;
+    private final TicketsFacade ticketsFacade;
 
-    public TicketsController(ITicketsFacade iTicketsFacade) {
-        this.ticketsFacade = iTicketsFacade;
+    public TicketsController(TicketsFacade ticketsFacade) {
+        this.ticketsFacade = ticketsFacade;
     }
 
     @GetMapping("/tickets")
