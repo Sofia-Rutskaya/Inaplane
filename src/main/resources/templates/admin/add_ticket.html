@@ -2,17 +2,14 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/src/main/resources/css/style.css">
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <link rel="stylesheet" href="../add_ticket_page.css">
     <title>Add Ticket</title>
 </head>
 <body>
-
 <nav class="navbar">
-    <!-- LOGO -->
-    <div class="logo">INAPLANE</div>
-    <!-- NAVIGATION MENU -->
     <ul class="nav-links">
         <!-- NAVIGATION MENUS -->
         <div class="menu">
@@ -30,64 +27,113 @@
 
 <div class=" text-center" style="color: white">
     <h1>ADD TICKETS IN CATALOG</h1>
-</div>
-<div>
-    <div class="Item-add">
-        <form class="form-AddTicket"  th:action="@{/catalog/add_ticket}" method="post">
-        <div >
-            <h3>CITY MODEL</h3>
+
+    <div id="square" style="
+    position:absolute;
+     width: 1100px;
+    height: 700px;
+    z-index: auto;
+    margin: 4% 30%;
+    border-radius: 1rem;
+    background: rgb(252, 252, 252);"></div>    
+
+
+<div class="grid">
+    <div class="Item-add" style="position:relative;">
+    
+        <div  class="form-group pt-1">
+            <a style=" margin: 1% 25% 1% 1%;" href="/catalog/Tickets" class="navigation">Tickets</a>
+    
+             <br>
+             <a style=" margin: 1%  25% 1% 1%;" class="navigation">Add Tickets</a> 
+             <br>
+             <a style=" margin: 1%  25% 1% 1%;" class="navigation">Delete Tickets</a> 
+             <br>
+             <a style=" margin: 1%  25% 1% 1%;" class="navigation">Schedule</a> 
+             <br>
+             
+             <a style=" margin: 1%  25% 1% 1%;" class="navigation">Add Schedule</a> 
+     
+             <br>
+           
+             <a style=" margin: 1%  25% 1% 1%;"  class="navigation">Delete Schedule</a>
+       
+              
+           
+         </div>
+ 
+ 
+     </div>
+    <div class="grid grid-profile" >
+
+        <form  th:action="@{/catalog/add_ticket}" method="post">
+            <div  class="forms-group">           
+           
             <label>Country From: </label>
             <input type="text" th:field="${model.countryFrom}"  placeholder="Country From">
+           
+            <br>
+            
             <label>City From: </label>
             <input type="text" th:field="${model.cityFrom}"  placeholder="City From">
             <br>
+            
             <label>Country To: </label>
             <input type="text" th:field="${model.country_to}"  placeholder="Country To">
+            <br>
+            
             <label>City To: </label>
             <input type="text" th:field="${model.city_to}"  placeholder="City To">
-        </div>
-        <div >
-            <h3>TIME TABLE</h3>
+            <br>
+            
             <label>Time: </label>
-            <input type="time" th:field="${model.timeBookingTicket}"  placeholder="Time">
-            <div style="width: 250px;     margin: 1% 5% 1% 36%;">
-
-                <label>Date: </label>
-                <input style="width: 100%; height: 2.3rem;" type="date" th:field="${model.dateBookingTicket}"  placeholder="Date">
-            </div>
+            
+            <input style="width:300px;" type="time" th:field="${model.timeBookingTicket}"  placeholder="Time">
+          
+            <br>
+           <label>Date: </label>
+            <input style="width:300px;" type="date" th:field="${model.dateBookingTicket}"  placeholder="Date">
+          
+            <br>
+          
             <label>Flight hour: </label>
-            <input type="time" th:field="${model.time_in}"  placeholder="Flight hour">
+            <input style="width:300px; " type="time" th:field="${model.time_in}"  placeholder="Flight hour">
+          
+            <br>
+          
             <label>Plane Name: </label>
+          
+             
             <input type="text" th:field="${plane.planeName}"  placeholder="Plane Name">
-        </div>
-        <div >
-            <h3>PLANE PLACES</h3>
-            <label>All places: </label>
-            <input type="text" th:field="${plane.allCountPlaces}"  placeholder="All places">
+         
+            <br>
             <label>Business places: </label>
             <input type="text" th:field="${plane.businessFreePlaces}"  placeholder="Business places">
             <br>
             <label>First places: </label>
-            <input type="text" th:field="${plane.firstFreePlaces}"  placeholder="First places">
+             <input type="text" th:field="${plane.firstFreePlaces}"  placeholder="First places">
+             <br>
             <label>Economy places: </label>
             <input type="text" th:field="${plane.economyFreePlaces}"  placeholder="Economy places">
-        </div>
-        <div >
-            <h3>PRICE</h3>
+            
+            <br>
+        
             <label>Price: </label>
+                       
             <input type="text" th:field="${model.price}"  placeholder="Price">
+            <br>
             <label>Currency: </label>
-            <input type="text" th:field="${model.currency}"  placeholder="Currency"></div>
-        <div class="col-sm-4"></div>
-        <div  class="form-group pt-1">
-            <button style=" margin: 5% 5% 1% 5%;  padding: 2% 15% 2% 15%;" class="btn btn-primary" type="submit">Save</button>
+            <input type="text" th:field="${model.currency}"  placeholder="Currency">
+        
+        
+            <button style=" margin: 1% 5% 1% 5%;  padding: 2% 15% 2% 15%;" class="btn btn-primary" type="submit">Save</button>
         </div>
 
 
 
         </form>
     </div>
-
+</div>
 </div>
 
 </body>
@@ -95,14 +141,120 @@
 
 
 <style>
-    .Item-add{
+    .forms-group{
+        height: 700px;
+        padding: 0;
+        margin: 5% ;
 
+        column-count: 2;
+        column-gap: 100px;
+    }
+
+     .grid.grid-profile{
+        position:absolute;
+        margin: 5% 200%;
+        color: black;
+
+     }
+
+    .grid.grid-profile label{
+        color: black;
+     }
+    .navigation {
+    margin: 1% 17% 1% 1%;
+    color: rgb(0, 0, 0);
+    display:inline-block;
+    text-align: left;
+    width: 200px;
+    height: 55px;
+    margin: 10%;
+    padding-top: 5%;
+    padding-bottom: 1%;
+    font-size: 150%;
+    }
+    .btn-primary{
+        align-self: center;
+        margin: auto;
+    }
+    .grid * {
+
+    margin: 2% 4% ;
+	padding: 10px 15px;
+	
+	text-align: left;
+	font-size: 22px;
+	font-family: sans-serif;
+	color: rgb(245, 245, 245);
+}
+
+
+/* Сетка */
+
+.grid {
+	display: grid;
+	position:absolute;
+  
+	grid-gap: 20px;
+}
+
+    a{
+        width: 190px;
+        height: 50px;
+       
+       font-style:oblique;
+       color: white;
+        margin: 5%;
+    }
+    .Item-add{
+       
         background-color: white;
-        border-radius: 2rem;
+        border-radius: 1rem;
+
+        margin: 50%;
+        
+    }
+    .middle-info{
+        margin: 20% 5% 5% 5%;
+        background-color: #e2e6f5;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        border-radius: 1rem;
+    }
+
+    body{
+        margin-left: auto;
+        margin-right: auto;
+        color: rgb(45, 45, 110);
+    }
+
+    th{
+        font-size: larger;
+    }
+    label{
+        color: white;
+        display: block;
         text-align: center;
-        margin: 5% 5% 5% 15%;
-        align-items: center;
-        padding: 1% 5% 5% 7%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5%;
+        padding-bottom: 1%;
+        font-size: 150%;
+    }
+
+    .navigation-table{
+        color: white;
+        margin-left: 5%;
+        margin-right: auto;
+
+        text-align: center;
+    }
+    .table{
+        background-color:white;
+        margin: auto;
+    }
+    .tableTicket{
+        margin-left: auto;
+        margin-right: auto;
     }
     .middle-info{
         margin: 20% 5% 5% 5%;
@@ -119,7 +271,6 @@
     .butt-Logout{
         justify-content: space-between;
         padding: 20px;
-        background-color:  #2674e8;
         color: #fff;
 
         border-radius: 5px;
@@ -129,7 +280,6 @@
         align-items: center;
         justify-content: space-between;
         padding: 20px;
-        background-color:  #2674e8;
         color: #fff;
     }
     .nav-links a {
@@ -146,7 +296,6 @@
         font-size: 18px;
     }
     .menu li:hover {
-        background-color: #38609b;
         border-radius: 5px;
         transition: 0.3s ease;
     }
@@ -158,7 +307,6 @@
         position: relative;
     }
     .dropdown {
-        background-color:  #2674e8;
         padding: 1em 0;
         position: absolute; /*WITH RESPECT TO PARENT*/
         display: none;
@@ -201,23 +349,22 @@
     .btn{
         background: #2674e8;
         border: #2243e1;
+        text-align: center;
     }
     .btn:hover {
         background: #29d9f1;
         border: #249de7;
     }
     input[type="date"] {
-        display:block;
-        position:relative;
-        padding:1rem 3.5rem 1rem 0.75rem;
+        padding: 1% 5%;
+        font-size: 1.3rem;
         width: 100%;
-        height: 2.3rem;
-        font-size:1rem;
+        height: 3rem;
         font-family:monospace;
         border:1px solid #8292a2;
         border-radius:0.25rem;
         background:
-                white
+                rgb(255, 255, 255)
                 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='22' viewBox='0 0 20 22'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23688EBB' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' transform='translate(1 1)'%3E%3Crect width='18' height='18' y='2' rx='2'/%3E%3Cpath d='M13 0L13 4M5 0L5 4M0 8L18 8'/%3E%3C/g%3E%3C/svg%3E")
                 right 1rem
                 center
@@ -227,11 +374,10 @@
     }
     input[type="date"]:focus {
         outline:none;
-        border-color:#3acfff;
+        border-color:#25414b;
         box-shadow:0 0 0 0.25rem rgba(0, 120, 250, 0.1);
     }
 
-    ::-webkit-datetime-edit-fields-wrapper {}
     ::-webkit-datetime-edit-month-field:hover,
     ::-webkit-datetime-edit-day-field:hover,
     ::-webkit-datetime-edit-year-field:hover {

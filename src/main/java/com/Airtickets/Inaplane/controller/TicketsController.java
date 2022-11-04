@@ -61,7 +61,7 @@ class TicketsController {
     }
     @RequestMapping(value = "/add_ticket", method = RequestMethod.GET)
     public String addTicketPage(@ModelAttribute("model") TicketsDTO model, @ModelAttribute("plane") PlaneDTO plane){
-        return "admin/add_ticket";
+        return "/admin/add_ticket";
     }
     @PostMapping(value = "/add_ticket")
     public String addTicket(@ModelAttribute("model") TicketsDTO model, @ModelAttribute("plane") PlaneDTO plane){

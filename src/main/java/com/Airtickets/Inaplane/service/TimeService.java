@@ -1,7 +1,7 @@
 package com.Airtickets.Inaplane.service;
 
 import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
-import com.Airtickets.Inaplane.persistence.repository.TicketsRepo.ITimeRepository;
+import com.Airtickets.Inaplane.persistence.repository.TicketsRepo.TimeRepository;
 import com.Airtickets.Inaplane.service.interfaces.ITimeService;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 public class TimeService implements ITimeService {
-    private final ITimeRepository timeRepository;
+    private final TimeRepository timeRepository;
 
-    public TimeService(ITimeRepository timeRepository) {
+    public TimeService(TimeRepository timeRepository) {
         this.timeRepository = timeRepository;
     }
 

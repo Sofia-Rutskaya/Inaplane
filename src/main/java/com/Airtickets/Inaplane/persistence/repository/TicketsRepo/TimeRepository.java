@@ -5,5 +5,5 @@ import com.Airtickets.Inaplane.persistence.repository.IBaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ITimeRepository extends IBaseRepository<TimeTicket> {
+public interface TimeRepository extends IBaseRepository<TimeTicket> {
 }
