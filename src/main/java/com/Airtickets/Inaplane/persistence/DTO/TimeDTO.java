@@ -6,8 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TimeDTO {
-    public String Time;
-    public String Date;
+    private Long TicketId;
+    private Long Id;
+    private String Time;
+    private String Date;
 
     public TimeDTO(String time, String date) {
         Time = time;

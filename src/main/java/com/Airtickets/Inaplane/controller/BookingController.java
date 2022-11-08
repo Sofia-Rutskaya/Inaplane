@@ -3,24 +3,13 @@ package com.Airtickets.Inaplane.controller;
 import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
 import com.Airtickets.Inaplane.facade.interfaces.IUserFacade;
 import com.Airtickets.Inaplane.persistence.DTO.*;
-import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
 import com.Airtickets.Inaplane.persistence.types.AgeTicket;
 import com.Airtickets.Inaplane.persistence.types.TicketTypeClass;
-import com.Airtickets.Inaplane.security.UserDetail;
 import com.Airtickets.Inaplane.util.SecurityUtil;
 import com.Airtickets.Inaplane.util.UserValidator;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
-
-import javax.validation.Valid;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/booking")
@@ -81,6 +70,19 @@ public class BookingController {
         if(place <= 0){
             return "redirect:/error";
         }
+
+        if(TicketTypeClass.valueOf(type).equals(TicketTypeClass.BUSINESS_CLASS)){
+            bookingTicket.setPrice(ticket.getPrice() + (ticket.getPrice() * 30)/100);
+        }
+
+        else if(TicketTypeClass.valueOf(type).equals(TicketTypeClass.FIRST_CLASS)){
+            bookingTicket.setPrice(ticket.getPrice() + (ticket.getPrice() * 75)/100);
+        }
+
+        if(AgeTicket.valueOf(age).equals(AgeTicket.CHILD)){
+            bookingTicket.setPrice(bookingTicket.getPrice() - (bookingTicket.getPrice() * 25)/100);
+        }
+
         bookingTicket.userDTO.placeNumber = place;
         userFacade.addTicketUser(bookingTicket);
         return "redirect:/booking/profile";

@@ -7,9 +7,20 @@
 <body>
 
 <nav class="navbar">
-  <script src="/src/main/resources/js/script.js"></script>
+  <ul class="nav-links">
+    <!-- NAVIGATION MENUS -->
+    <div class="menu">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/">About</a></li>
+      <li>
+        <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+          <input hidden type="submit" value="Sign Out"/>
+        </form></li>
+      <li><a href="/">Contact</a></li>
+    </div>
+  </ul>
 </nav>
-
 <th:block  th:each="ticket, state : ${profile.getTicket()}" >
   <div class="container middle-item ">
     <div class=" ticket-place">

@@ -6,15 +6,23 @@
 </head>
 <body>
 <nav class="navbar">
-    <script src="/src/main/resources/js/script.js"></script>
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form></li>
+            <li><a href="/">Contact</a></li>
+        </div>
+    </ul>
 </nav>
-<div style="padding: 5% 1% 2% 1%;">
 
-    <a th:href="@{/home}"><img src="https://cdn-icons-png.flaticon.com/512/860/860790.png" style="height: 50px; width: 50px;"></a>
-</div>
-
-
-<div class="middle-item">
+<div class="grid" style="margin-top: 5%;">
+    <div class="middle-item">
     <div>
         <h1 style="align-items: center; text-align: center; font-size: 250%;">Book a ticket</h1>
     </div>
@@ -22,15 +30,21 @@
             <form  th:object="${userBooking}" th:action="@{'/booking/ticket?id_ticket=' + ${userBooking.id} +'&date_ticket='
 + ${userBooking.dateBookingTicket} +'&time_ticket=' + ${userBooking.timeBookingTicket}}" th:method="POST">
 
-                <div><label  th:text="${userBooking.countryFrom}"  th:field="${userBooking.countryFrom}"></label>
-                <label th:text="${userBooking.cityFrom}" th:field="${userBooking.cityFrom}"></label>
-
-                <label th:text="${userBooking.country_to}" th:field="${userBooking.country_to}"></label>
-                <label th:text="${userBooking.city_to}"  th:field="${userBooking.city_to}"></label></div>
-                <div>  <label th:field="*{dateBookingTicket}"  th:text="'Date:   ' + ${userBooking.getDateBookingTicket()}"></label></div>
-                <div> <label  th:field="*{timeBookingTicket}" th:text="'Time:   ' + ${userBooking.timeBookingTicket}"></label></div>
-                <div><label th:text="'Flight time:   ' + ${userBooking.time_in}"></label></div>
-                <label th:text="${userBooking.price} + ${userBooking.currency}"></label>
+                <label class="label-mp" th:text="${userBooking.countryFrom}"  th:field="${userBooking.countryFrom}">countryFrom:</label>
+                <br/>
+                <label class="label-mp" th:text="${userBooking.cityFrom}" th:field="${userBooking.cityFrom}">cityFrom:</label>
+                <br/>
+                <label class="label-mp" th:text="${userBooking.country_to}" th:field="${userBooking.country_to}">country_to:</label>
+                <br/>
+                <label  class="label-mp" th:text="${userBooking.city_to}"  th:field="${userBooking.city_to}">city_to:</label>
+                <br/>
+                <label th:field="*{dateBookingTicket}"  th:text="'Date:   ' + ${userBooking.getDateBookingTicket()}"> Date:</label>
+                <br/>
+                <label  th:field="*{timeBookingTicket}" th:text="'Time:   ' + ${userBooking.timeBookingTicket}"> Time:</label>
+                <br/>
+                <label th:text="'Flight time:   ' + ${userBooking.time_in}">Flight time</label>
+                <br/>
+                <label th:text="${userBooking.price} + ${userBooking.currency}">price</label>
 
 
                 <div class="columns">
@@ -72,10 +86,38 @@
 
 
                 <div>
-                    <input class="button-buy-ticket" type="submit" th:value="'Continue >'">
+                    <input class="button-buy-ticket" type="submit" >
                 </div>
             </form>
         </div>
+
+</div>
+
+<div class="grid grid-profile">
+    <div class="packages">
+        <h3>Economy Package</h3>
+        <li>Hand luggage up to 5 kg</li>
+        <label th:text="'Price: ' + ${userBooking.price} + ${userBooking.currency}"> </label>
+    </div>
+    
+    <div  class="packages">
+        <h3>Business Package</h3>
+        <li>Hand luggage up to 5 kg</li>
+        <li>Suitcase up to 10 kg</li>
+        <li>Soft drinks</li>
+        <label th:text="'Price: ' + ${userBooking.price + ((userBooking.price * 30) /100)} + ${userBooking.currency}"> </label>
+    </div>
+    
+    <div  class="packages">
+        <h3>First Package</h3>
+        <li>Hand luggage up to 15 kg</li>
+        <li>Suitcase up to 50 kg</li>
+        <li>Food and drinks</li>
+        <li>Help of flight attendants</li>
+        <label th:text="'Price: ' + ${userBooking.price + ((userBooking.price * 70) /100)} + ${userBooking.currency}"> </label>
+    </div>
+    
+</div>
 
 </div>
 </body>
@@ -84,16 +126,50 @@
 
 
 <style>
+    .packages{
+        width: 400px;
+        background-color: white;
+        margin: 3% 1% 1% 5%;
+        font-size: larger;
+        border-radius: 0.5em;
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-bottom: 5%;
+    }
+.label-mp{
+    margin: 5%;
+    padding: 4%;
+}
+.grid {
+	display: grid;
+	position:absolute;
 
+    border: #000;
+    border-radius: 4px;
+	grid-gap: 5px;
+}
+
+
+     .grid.grid-profile{
+        position:absolute;
+        margin: 5% 200%;
+        color: black;
+        width: 400px;
+     }
+
+    .grid.grid-profile label{
+        color: black;
+     }
     .items label{
-        padding: 3% 5% 5% 5%;
+        padding: 5%;
+        margin: 5%;
     }
     .form-control{
         background-color: #f8f9fa;
-        padding: 20px;
-        padding: 25px 15px;
+      
+        padding: 15px 15px;
         margin-bottom: 1.3rem;
-        border-radius: 1.5rem;
+        border-radius: 0.5rem;
     }
     .form-control:focus {
 
@@ -119,11 +195,12 @@
         margin: 1% 15% 10% 15%;
         padding: 5% 15% 5% 15%;
         background-color: white;
-        border-radius: 2rem;
+        border-radius: 0.5rem;
+        width: 500px;
     }
     .items{
         text-align: center;
-        font-size: 170%;
+        font-size: 120%;
     }
 
     .button-buy-ticket{
@@ -131,7 +208,7 @@
         margin: 6% 20% 3% 12%;
         padding: 0% 25% 0% 25%;
         color: #c6cfe1;
-        border-radius: 1.5rem;
+        border-radius: 0.5rem;
         box-shadow: none;
         font-size: 155%;
         border-color: #2674e8;
@@ -153,7 +230,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 20px;
-        background-color:  #2674e8;
+      
         color: #fff;
     }
     .nav-links a {

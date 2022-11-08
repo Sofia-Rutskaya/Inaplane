@@ -1,6 +1,6 @@
 package com.Airtickets.Inaplane.util;
 
-import com.Airtickets.Inaplane.security.UserDetail;
+import com.Airtickets.Inaplane.service.security.UserDetail;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

@@ -11,29 +11,41 @@
 
 <link rel="import" href="/src/main/resources/templates/header.html">
 <body>
-    <nav class="navbar">
-        <script src="/src/main/resources/js/script.js"></script>
-    </nav>
+
+<nav class="navbar">
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form></li>
+            <li><a href="/">Contact</a></li>
+        </div>
+    </ul>
+</nav>
 
     <div class="grid">
         <div class="Item-add">
     
            <div  class="form-group pt-1">
-               <a style=" margin: 1% 25% 1% 1%;" href="/catalog/tickets" class="navigation">Tickets</a>
-       
+               <a style=" margin: 1% 25% 1% 1%;" href="/catalog/remove_ticket?currentPage=0" class="navigation">Tickets</a>
                 <br>
                 <a style=" margin: 1%  25% 1% 1%;" href="/catalog/add_ticket" class="navigation">Add Tickets</a>
                 <br>
-                <a style=" margin: 1%  25% 1% 1%;" href="/catalog/remove_ticket" class="navigation">Delete Tickets</a>
+                <a style=" margin: 1%  25% 1% 1%;" href="/catalog/remove_ticket?currentPage=0" class="navigation">Delete Tickets</a>
                 <br>
                 <a style="margin: 1%  25% 1% 1%;" href="/catalog/time_ticket" class="navigation">Schedule</a>
                 <br>
                 
-                <a style=" margin: 1%  25% 1% 1%;" class="navigation">Add Schedule</a> 
+                <a style=" margin: 1%  25% 1% 1%;" class="/catalog/add_time_ticket">Add Schedule</a>
         
                 <br>
               
-                <a style=" margin: 1%  25% 1% 1%;"  class="navigation">Delete Schedule</a>
+                <a style=" margin: 1%  25% 1% 1%;"  class="/catalog/delete_time_ticket">Delete Schedule</a>
           
                  
               

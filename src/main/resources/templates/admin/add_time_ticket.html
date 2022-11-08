@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html   lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head>
-  <title>Registration</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=PT+Sans'><link rel="stylesheet" href="../../static/css/regPage.css">
+<html lang="en">
 
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 
@@ -23,42 +23,29 @@
     </div>
   </ul>
 </nav>
-<div class="container">
-  <br>
-  <br>
-  <br>
-  <div>
-    <h2 style="color: white" class="card-title text-center">Registration</h2></div>
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="card">
-        <div class="card card-body">
 
-          <form _lpchecked="1" th:method="POST" th:object="${user}" th:action="@{/auth/registration}">
-            <div class="form-group">
-              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-              <input type="text" th:field="*{fullName}" class="form-control" id="name" placeholder="Name">
-              <div style="color: red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Username Error</div>
-            </div>
-            <div class="form-group">
-              <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Email">
-            </div>
+<label>ADD TIME</label>
+<div class="time-form">
 
-            <div class="form-group">
-              <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password">
-              <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
 
-            </div>
+  <form th:object="${model}" th:action="@{'time_ticket/'+ ${model.getTicketId()} + '/add'}" method="post">
+    <div  class="forms-group">
 
-            <div class="d-flex flex-row align-items-center justify-content-between">
-              <a href="/auth/login">Login</a>
-              <input type="submit" class="btn btn-primary">Create Account</input>
-            </div>
-          </form>
-        </div>
-      </div>
+      <label>Date: </label>
+      <input type="date" th:field="${model.date}" >
+
+      <br>
+
+      <label>Time: </label>
+      <input type="time" th:field="${model.time}"  placeholder="City From">
+      <br>
+
+      <button style=" margin: 1% 5% 1% 5%;  padding: 2% 15% 2% 15%;" class="btn btn-primary" type="submit">Save</button>
     </div>
-  </div>
+
+
+
+  </form>
 </div>
 
 </body>
@@ -66,6 +53,7 @@
 
 
 <style>
+
   body{
     margin-left: auto;
     margin-right: auto;
@@ -85,6 +73,59 @@
     padding-bottom: 1%;
     font-size: 150%;
   }
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    color: #fff;
+  }
+  .nav-links a {
+    color: #fff;
+  }
+  /* LOGO */
+  .logo {
+    font-size: 32px;
+  }
+  /* NAVBAR MENU */
+  .menu {
+    display: flex;
+    gap: 1em;
+    font-size: 18px;
+  }
+  .menu li:hover {
+    border-radius: 5px;
+    transition: 0.3s ease;
+  }
+  .menu li {
+    padding: 5px 14px;
+  }
+  /* DROPDOWN MENU */
+  .services {
+    position: relative;
+  }
+  .dropdown {
+    padding: 1em 0;
+    position: absolute; /*WITH RESPECT TO PARENT*/
+    display: none;
+    border-radius: 8px;
+    top: 35px;
+  }
+  .dropdown li + li {
+    margin-top: 10px;
+  }
+  .dropdown li {
+    padding: 0.5em 1em;
+    width: 8em;
+    text-align: center;
+  }
+  .dropdown li:hover {
+    background-color: #2f3a69;
+  }
+  .services:hover .dropdown {
+    display: block;
+  }
+
 
   .navigation-table{
     color: white;
@@ -192,6 +233,8 @@
     column-count: 3;
   }
   .btn{
+    width: 60px;
+    height: 40px;
     background: #2674e8;
     border: #2243e1;
     text-align: center;
@@ -257,3 +300,4 @@
 
 
 </style>
+

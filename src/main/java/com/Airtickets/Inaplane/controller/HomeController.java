@@ -4,23 +4,19 @@ import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
 import com.Airtickets.Inaplane.persistence.DTO.CityFromDTO;
 import com.Airtickets.Inaplane.persistence.DTO.CityTicketDTO;
 import com.Airtickets.Inaplane.persistence.DTO.CityToDTO;
-import com.Airtickets.Inaplane.security.UserDetail;
+import com.Airtickets.Inaplane.service.security.UserDetail;
 import com.Airtickets.Inaplane.util.SecurityUtil;
-import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller

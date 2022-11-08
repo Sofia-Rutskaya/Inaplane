@@ -1,4 +1,4 @@
-package com.Airtickets.Inaplane.security;
+package com.Airtickets.Inaplane.service.security;
 
 import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
 import org.springframework.security.core.GrantedAuthority;

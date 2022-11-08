@@ -2,7 +2,7 @@ package com.Airtickets.Inaplane.service;
 
 import com.Airtickets.Inaplane.persistence.entity.Users.RegisteredUser;
 import com.Airtickets.Inaplane.persistence.repository.UserRepo.IUserRepository;
-import com.Airtickets.Inaplane.security.UserDetail;
+import com.Airtickets.Inaplane.service.security.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.util.List;
 @Getter
 @Setter
-public class RemoveTicketList {
-    public List<RemoveTicketsDto> tickets;
+public class RemoveTicketList  extends BaseDTO {
+    private List<RemoveTicketsDto> tickets;
+    private int CurrentPage;
 }

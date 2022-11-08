@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 @Getter
 @Setter
-public class RemoveTicketsDto {
+public class RemoveTicketsDto extends BaseDTO {
     public TicketsDTO ticketsDTO;
     public PlaneDTO planes;
 

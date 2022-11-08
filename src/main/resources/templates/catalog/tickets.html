@@ -7,7 +7,19 @@
 <body>
 
 <nav class="navbar">
-    <script src="/src/main/resources/js/script.js"></script>
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form></li>
+            <li><a href="/">Contact</a></li>
+        </div>
+    </ul>
 </nav>
 
 <div style="color: white; margin: 5% 10% 7% 10%;">
@@ -22,7 +34,7 @@
 
 <div class="container middle-item ">
     <div class=" ticket-place">
-
+        <div class="grid">
         <th:block  th:each="items, state : ${model.getTimeFrom()}" >
 
                 <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${model.dateBookingTicket} +'&time_ticket=' + ${items}}" th:method="POST">
@@ -40,7 +52,7 @@
                     <td th:text="${model.price}" ></td>
                     <td th:text="${model.currency}" ></td>
                     </div>
-                    <div row air-ticket>
+                    <div >
                         <button class="button-buy-ticket" type="submit">BUY</button>
                     </div>
 
@@ -48,7 +60,7 @@
 
 
         </th:block>
-
+    </div>
     </div>
 
 
@@ -58,7 +70,24 @@
 </html>
 
 <style>
+.grid {
+	display: grid;
+	position:absolute;
+  
+	grid-gap: 20px;
+}
 
+
+     .grid.grid-profile{
+        position:absolute;
+        margin: 5% 200%;
+        color: black;
+
+     }
+
+    .grid.grid-profile label{
+        color: black;
+     }
     body{
         background-image: url("https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg");
         background-repeat: no-repeat;
@@ -69,12 +98,8 @@
     }
 
     .button-buy-ticket{
-        text-align: right;
-        margin: 0% 20% 0% 22%;
-        padding: 0% 25% 0% 25%;
         color: #c6cfe1;
-        border-radius: 1.5rem;
-        box-shadow: none;
+        border-radius: 0.5rem;
         font-size: 155%;
         border-color: #2674e8;
         background-color: #2674e8;
