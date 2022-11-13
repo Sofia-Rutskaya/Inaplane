@@ -7,7 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class TimeList {
+public class TimeList extends BaseDTO {
     public List<TimeDTO> times;
+    private int CurrentPage;
 
 }

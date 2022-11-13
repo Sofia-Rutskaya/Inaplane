@@ -5,14 +5,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TimeDTO {
+public class TimeDTO extends BaseDTO {
     private Long TicketId;
     private Long Id;
     private String Time;
     private String Date;
 
-    public TimeDTO(String time, String date) {
-        Time = time;
-        Date = date;
+    public TimeDTO(Long ticketId, Long id, String time, String date) {
+        setTime(time);
+        setDate(date);
+        setId(id);
+        setTicketId(ticketId);
+
     }
 }

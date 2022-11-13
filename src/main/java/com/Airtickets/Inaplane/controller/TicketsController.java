@@ -28,15 +28,9 @@ class TicketsController {
         try{
             //LocalDate dateTicket = LocalDate.parse(date);
             var ticket = ticketsFacade.getTicketById(id);
-            for( int i = 0; i < ticket.dateFrom.size(); i++){
-                if(!ticket.dateFrom.get(i).equals(date)){
-                    ticket.dateFrom.remove(i);
-                    ticket.timeFrom.remove(i);
-                }
-            }
 
 
-            model.timeFrom = ticket.timeFrom;
+            model.setTime(ticket.getTime());
             model.dateBookingTicket = date;
             model.cityFrom = ticket.cityFrom;
             model.countryFrom = ticket.countryFrom;
@@ -103,17 +97,45 @@ class TicketsController {
      public String timeTicketPage(@PathVariable Long id, @ModelAttribute("model") TimeList model){
         var ticket = ticketsFacade.getTicketById(id);
         model.times = new ArrayList<>();
-        for(int i = 0; i< ticket.getDateFrom().size(); i++){
-            model.times.add(new TimeDTO(ticket.getTimeFrom().get(i), ticket.getDateFrom().get(i)));
+        for(int i = 0; i< ticket.getTime().size(); i++){
+            model.times.add(new TimeDTO(1l, 1l, ticket.getTime().get(i).getTime(), ticket.getTime().get(i).getDate()));
         }
         return "/admin/time_ticket";
     }
 
     @GetMapping("/time_ticket/{id}/add")
-    public String timeAdd(@PathVariable Long id, @ModelAttribute("model") TimeDTO model){
+    public String timeAddPage(@RequestParam(value = "currentPage") int currentPage, @PathVariable Long id, @ModelAttribute("model") TimeDTO model, @ModelAttribute("list") TimeList list){
+        var ticket = ticketsFacade.getTicketById(id);
+        list.times = new ArrayList<>();
+
+        for(int i = 0; i< ticket.getTime().size(); i++){
+            list.times.add(new TimeDTO(ticket.getId(), ticket.getTime().get(i).getId() ,ticket.getTime().get(i).getTime(), ticket.getTime().get(i).getDate()));
+        }
+
+
+        Pagination<TimeDTO> pages = new Pagination();
+        pages.setItems(list.times);
+        pages.setCurrentPage(currentPage);
+        list.setTimes(new ArrayList<>());
+        list.getTimes().addAll(pages.currentItems());
+
 
         return "/admin/add_time_ticket";
     }
+
+     @PostMapping("/time_ticket/{id}/add")
+        public String timeAdd(@PathVariable Long id, @ModelAttribute("model") TimeDTO model, @ModelAttribute("list") TimeList list){
+        ticketsFacade.createTime(model);
+        return "redirect:/admin/time_ticket/" + model.getTicketId() + "/add?currentPage=0";
+    }
+
+    @RequestMapping("/time_ticket/{ticketId}/delete/{id}")
+        public String timeDelete(@ModelAttribute("model") TimeDTO model, @ModelAttribute("list") TimeList list){
+
+        ticketsFacade.deleteTime(model.getId());
+        return "redirect:/admin/time_ticket/" + model.getTicketId() + "/add?currentPage=0";
+    }
+
 
 
 }

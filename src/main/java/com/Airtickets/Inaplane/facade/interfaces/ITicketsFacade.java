@@ -1,9 +1,7 @@
 package com.Airtickets.Inaplane.facade.interfaces;
 
-import com.Airtickets.Inaplane.persistence.DTO.CityFromDTO;
-import com.Airtickets.Inaplane.persistence.DTO.CityToDTO;
-import com.Airtickets.Inaplane.persistence.DTO.PlaneDTO;
-import com.Airtickets.Inaplane.persistence.DTO.TicketsDTO;
+import com.Airtickets.Inaplane.persistence.DTO.*;
+import com.Airtickets.Inaplane.persistence.entity.Tickets.TimeTicket;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,4 +19,6 @@ public interface ITicketsFacade extends BaseFacade{
     void createTicket(@RequestBody TicketsDTO  ticketDto, @RequestBody PlaneDTO planeDto);
     void deleteTickets(@RequestBody TicketsDTO  ticketDto);
     List<PlaneDTO> getAllPlanes ();
+    void createTime(@RequestBody TimeDTO time);
+    void deleteTime (@PathVariable Long id);
 }

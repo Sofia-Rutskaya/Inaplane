@@ -25,27 +25,57 @@
 </nav>
 
 <label>ADD TIME</label>
-<div class="time-form">
+<div class="grid">
 
+  <div class="grid table">
+    <table border="1">
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Action</th>
+      </tr>
 
-  <form th:object="${model}" th:action="@{'time_ticket/'+ ${model.getTicketId()} + '/add'}" method="post">
+      <tr th:each="ticket : ${list.getTimes()}">
+
+        <form th:action="@{'delete/' + ${ticket.getId()}}" method="post">
+        <td th:field="${ticket.date}" th:text="${ticket.getDate()}"></td>
+        <td th:field="${ticket.time}" th:text="${ticket.getTime()}"></td>
+        <td>
+
+            <input class="btn Table-BTN" type="submit" th:value="Delete"/>
+
+        </td>
+
+        </form>
+      </tr>
+    </table>
+
+    <span class="text-center">
+    <a class="navigation-table"   th:href="@{'/catalog/time_ticket/' + ${model.id} + '/add?currentPage=' + ${(list.getCurrentPage() - 1)}}" > < Previous</a>
+
+    <a class="navigation-table"   th:href="@{'/catalog/time_ticket/' + ${model.id} + '/add?currentPage=' + ${(list.getCurrentPage() + 1)}}">Next > </a>
+    </span>
+  </div>
+
+<div class="grid grid-profile">
+
+  <form th:object="${model}" th:action="@{'add'}" method="post">
     <div  class="forms-group">
 
       <label>Date: </label>
-      <input type="date" th:field="${model.date}" >
+      <input class="lbl" type="date" th:field="${model.date}" >
 
       <br>
 
       <label>Time: </label>
-      <input type="time" th:field="${model.time}"  placeholder="City From">
+      <input class="lbl" type="time" th:field="${model.time}"  placeholder="City From">
       <br>
 
       <button style=" margin: 1% 5% 1% 5%;  padding: 2% 15% 2% 15%;" class="btn btn-primary" type="submit">Save</button>
     </div>
 
-
-
   </form>
+</div>
 </div>
 
 </body>
@@ -53,6 +83,36 @@
 
 
 <style>
+  .grid.table{
+
+    background-color: white;
+    position: absolute;
+    margin: 5%;
+    background-color: white;
+    width: 400px;
+  }
+
+  .grid {
+    display: grid;
+
+
+    grid-gap: 20px;
+  }
+
+
+  .grid.grid-profile{
+    background-color: white;
+    position:absolute;
+    margin: 5% 40%;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 5% 10%;
+    width: 300px;
+  }
+
+  .grid.grid-profile label{
+    color: black;
+  }
 
   body{
     margin-left: auto;
@@ -214,6 +274,10 @@
     display: block;
   }
 
+  .lbl{
+    width: -webkit-fill-available;
+    height: 40px;
+  }
 
 
   .columns{
@@ -232,8 +296,15 @@
     margin: 1% 10% 1% 19%;
     column-count: 3;
   }
+  .btn.Table-BTN{
+    width: -webkit-fill-available;
+  }
+
   .btn{
-    width: 60px;
+    margin: 7% 0% 0% 0%;
+    padding: 2% 15% 2% 15%;
+    /* align-content: center; */
+    width: -webkit-fill-available;
     height: 40px;
     background: #2674e8;
     border: #2243e1;

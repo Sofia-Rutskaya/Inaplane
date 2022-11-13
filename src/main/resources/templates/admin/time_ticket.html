@@ -23,21 +23,46 @@
     </ul>
 </nav>
 
-<table border="1">
-    <tr>
-        <th>Date</th>
-        <th>Time</th>
-    </tr>
-    <tr th:each="ticket : ${model.getTimes()}">
+<div class="grid">
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        <tr th:each="ticket : ${model.getTimes()}">
             <td th:text="${ticket.Date}"></td>
             <td th:text="${ticket.Time}"></td>
-    </tr>
-</table>
+        </tr>
+    </table>
+</div>
+
+
 </body>
 </html>
 
 
 <style>
+
+
+    .grid {
+        display: grid;
+        position:absolute;
+
+        grid-gap: 20px;
+    }
+
+
+    .grid.grid-profile{
+        position:absolute;
+        margin: 5% 200%;
+        color: black;
+
+    }
+
+    .grid.grid-profile label{
+        color: black;
+    }
+
     body{
         margin-left: auto;
         margin-right: auto;

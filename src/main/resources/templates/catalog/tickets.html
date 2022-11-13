@@ -35,7 +35,7 @@
 <div class="container middle-item ">
     <div class=" ticket-place">
         <div class="grid">
-        <th:block  th:each="items, state : ${model.getTimeFrom()}" >
+        <th:block  th:each="items, state : ${model.getTime()}" >
 
                 <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${model.dateBookingTicket} +'&time_ticket=' + ${items}}" th:method="POST">
                     <div class=" air-ticket">
@@ -47,12 +47,12 @@
                         <label>Date:   </label>
                     <td th:field="*{dateBookingTicket}"  th:text="${model.dateBookingTicket} "></td>
                         <label>Time:   </label>
-                    <td th:field="*{timeFrom}" th:text="${items}" name="${items}"></td>
+                    <td th:field="*{time}" th:text="${items}" name="${items}"></td>
                         <br>
                     <td th:text="${model.price}" ></td>
                     <td th:text="${model.currency}" ></td>
                     </div>
-                    <div >
+                    <div class="grid grid-profile">
                         <button class="button-buy-ticket" type="submit">BUY</button>
                     </div>
 
@@ -71,16 +71,16 @@
 
 <style>
 .grid {
+    margin: 5% 5% 5% 15%;
 	display: grid;
 	position:absolute;
   
 	grid-gap: 20px;
 }
 
-
      .grid.grid-profile{
         position:absolute;
-        margin: 5% 200%;
+        margin: 5% 10%;
         color: black;
 
      }
@@ -105,13 +105,12 @@
         background-color: #2674e8;
     }
     .air-ticket{
-        margin: 1% 5% 0% 5%;
         background-color: #ffffff;
         padding: 1% 1% 1% 5%;
         text-align: center;
         color: #2674e8;
         font-size: 200%;
-        border-radius: 2rem;
+        border-radius: 0.5rem;
     }
 
     .navbar {
@@ -120,7 +119,6 @@
         align-items: center;
         justify-content: space-between;
         padding: 20px;
-        background-color:  #2674e8;
         color: #fff;
     }
     .nav-links a {

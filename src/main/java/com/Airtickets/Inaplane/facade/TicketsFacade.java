@@ -1,10 +1,7 @@
 package com.Airtickets.Inaplane.facade;
 
 import com.Airtickets.Inaplane.facade.interfaces.ITicketsFacade;
-import com.Airtickets.Inaplane.persistence.DTO.CityFromDTO;
-import com.Airtickets.Inaplane.persistence.DTO.CityToDTO;
-import com.Airtickets.Inaplane.persistence.DTO.PlaneDTO;
-import com.Airtickets.Inaplane.persistence.DTO.TicketsDTO;
+import com.Airtickets.Inaplane.persistence.DTO.*;
 import com.Airtickets.Inaplane.persistence.entity.Tickets.*;
 import com.Airtickets.Inaplane.service.interfaces.*;
 import org.springframework.stereotype.Service;
@@ -193,6 +190,25 @@ public class TicketsFacade implements ITicketsFacade {
         planeService.create(plane);
     }
 
+    public void createTime(@RequestBody TimeDTO time){
+
+        TimeTicket ticket = new TimeTicket();
+        ticket.setDateFrom(LocalDate.parse(time.getDate()));
+        ticket.setTimeFrom(LocalTime.parse(time.getTime()));
+        var city = fromService.getById(time.getId());
+        Tickets tickets = ticketService.getById(time.getId());
+        CityFrom from = new CityFrom();
+        from.setId(time.getId());
+        var list = city.getTimes();
+        list.add(ticket);
+        from.setTimes(list);
+        from.setCountryFrom(tickets.getFrom().getCountryFrom());
+        from.setCityFrom(tickets.getFrom().getCityFrom());
+        from.setTicket(tickets);
+        timeService.create(ticket);
+        fromService.create(from);
+        }
+
 
     public Plane getPlaneById(@PathVariable Long id){
         return planeService.getById(id);
@@ -210,5 +226,9 @@ public class TicketsFacade implements ITicketsFacade {
 
     public List<TimeTicket> getTime (){
         return fromService.getTime();
+    }
+
+    public void deleteTime (@PathVariable Long id){
+       timeService.deleteById(id);
     }
 }
