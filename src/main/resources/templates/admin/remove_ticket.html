@@ -51,7 +51,7 @@
             <th th:text="${ticket.getTicketsDTO().country_to}"></th>
             <th th:text="${ticket.getTicketsDTO().city_to}"></th>
             <th>
-                <a th:href="@{'/catalog/time_ticket/' + ${ticket.getTicketsDTO().id}}" type="button"> Time </a>
+                <a th:href="@{'/catalog/time_ticket/' + ${ticket.getTicketsDTO().id} + '/add?currentPage=0'}" type="button"> Time </a>
             </th>
             <th th:text="${ticket.getTicketsDTO().time_in}"></th>
             <th th:text="${ticket.getPlanes().planeName}"></th>

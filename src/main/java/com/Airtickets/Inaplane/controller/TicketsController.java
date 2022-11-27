@@ -21,38 +21,6 @@ class TicketsController {
         this.ticketsFacade = iTicketsFacade;
     }
 
-    @GetMapping("/tickets")
-    public String getAllTickets ( @RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
-                                  @ModelAttribute("model") TicketsDTO model){
-         //var ticket = ticketsFacade.getAllTickets();
-        try{
-            //LocalDate dateTicket = LocalDate.parse(date);
-            var ticket = ticketsFacade.getTicketById(id);
-
-
-            model.setTime(ticket.getTime());
-            model.dateBookingTicket = date;
-            model.cityFrom = ticket.cityFrom;
-            model.countryFrom = ticket.countryFrom;
-            model.city_to = ticket.city_to;
-            model.currency = ticket.currency;
-            model.price = ticket.price;
-            model.time_in = ticket.time_in;
-            model.id = ticket.id;
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-
-        return "/catalog/tickets";
-    }
-
-    @RequestMapping(value = "/tickets", method = RequestMethod.POST)
-    public String getFilterTickets (@RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
-                                    @RequestParam(value = "time_ticket") String time){
-         //var ticket = ticketsFacade.getAllTickets();
-        return "redirect:/booking/ticket?id_ticket=" + id +"&date_ticket=" + date +"&time_ticket=" + time;
-    }
     @RequestMapping(value = "/add_ticket", method = RequestMethod.GET)
     public String addTicketPage(@ModelAttribute("model") TicketsDTO model, @ModelAttribute("plane") PlaneDTO plane){
         return "/admin/add_ticket";
@@ -66,6 +34,9 @@ class TicketsController {
     @GetMapping("/remove_ticket")
     public String deleteTicketPage(@RequestParam(value = "currentPage") int currentPage, @ModelAttribute("model") RemoveTicketList model){
 
+        if(currentPage <= 0 ){
+            currentPage = 0;
+        }
         var tickets = ticketsFacade.getAllTickets();
         var plane= ticketsFacade.getAllPlanes();
         RemoveTicketList modelTickets = new RemoveTicketList();
@@ -80,6 +51,7 @@ class TicketsController {
         Pagination<RemoveTicketsDto> pages = new Pagination();
         pages.setItems(modelTickets.getTickets());
         pages.setCurrentPage(currentPage);
+        pages.setPageSize(8);
         model.setTickets(new ArrayList<>());
         model.getTickets().addAll(pages.currentItems());
 
@@ -93,16 +65,6 @@ class TicketsController {
         return "/admin/remove_ticket";
         }
 
-     @GetMapping("/time_ticket/{id}")
-     public String timeTicketPage(@PathVariable Long id, @ModelAttribute("model") TimeList model){
-        var ticket = ticketsFacade.getTicketById(id);
-        model.times = new ArrayList<>();
-        for(int i = 0; i< ticket.getTime().size(); i++){
-            model.times.add(new TimeDTO(1l, 1l, ticket.getTime().get(i).getTime(), ticket.getTime().get(i).getDate()));
-        }
-        return "/admin/time_ticket";
-    }
-
     @GetMapping("/time_ticket/{id}/add")
     public String timeAddPage(@RequestParam(value = "currentPage") int currentPage, @PathVariable Long id, @ModelAttribute("model") TimeDTO model, @ModelAttribute("list") TimeList list){
         var ticket = ticketsFacade.getTicketById(id);
@@ -113,9 +75,13 @@ class TicketsController {
         }
 
 
+        if(currentPage <= 0 ){
+            currentPage = 0;
+        }
         Pagination<TimeDTO> pages = new Pagination();
         pages.setItems(list.times);
         pages.setCurrentPage(currentPage);
+        pages.setPageSize(8);
         list.setTimes(new ArrayList<>());
         list.getTimes().addAll(pages.currentItems());
 
@@ -123,17 +89,17 @@ class TicketsController {
         return "/admin/add_time_ticket";
     }
 
-     @PostMapping("/time_ticket/{id}/add")
-        public String timeAdd(@PathVariable Long id, @ModelAttribute("model") TimeDTO model, @ModelAttribute("list") TimeList list){
+     @PostMapping("/time_ticket/{ticketId}/add")
+        public String timeAdd( @ModelAttribute("model") TimeDTO model, @ModelAttribute("list") TimeList list){
         ticketsFacade.createTime(model);
-        return "redirect:/admin/time_ticket/" + model.getTicketId() + "/add?currentPage=0";
+        return "redirect:/catalog/time_ticket/" + model.getTicketId() + "/add?currentPage=0";
     }
 
     @RequestMapping("/time_ticket/{ticketId}/delete/{id}")
         public String timeDelete(@ModelAttribute("model") TimeDTO model, @ModelAttribute("list") TimeList list){
 
         ticketsFacade.deleteTime(model.getId());
-        return "redirect:/admin/time_ticket/" + model.getTicketId() + "/add?currentPage=0";
+        return "redirect:/catalog/time_ticket/" + model.getTicketId() + "/add?currentPage=0";
     }
 
 

@@ -139,19 +139,10 @@ public class TicketsFacade implements ITicketsFacade {
     }
 
 
-    public void createFrom(@RequestBody CityFrom from){
-        fromService.create(from);
-    }
-
-
     public CityFrom getFromById(@PathVariable Long id){
         return fromService.getById(id);
     }
 
-
-    public void deleteFrom(@PathVariable Long id){
-        fromService.delete(id);
-    }
 
 
     public List<CityToDTO> getAllCityTo (){
@@ -160,21 +151,6 @@ public class TicketsFacade implements ITicketsFacade {
 
         return items;
     }
-
-
-    public void createTo(@RequestBody CityTo cityTo){
-        toService.create(cityTo);
-    }
-
-    public CityTo getToById(@PathVariable Long id){
-        return toService.getById(id);
-    }
-
-
-    public void deleteTo(@PathVariable Long id){
-        toService.delete(id);
-    }
-
 
     public List<PlaneDTO> getAllPlanes (){
         var plane = planeService.getAllItem();
@@ -186,9 +162,6 @@ public class TicketsFacade implements ITicketsFacade {
         return planeDto;
     }
 
-    public void createPlane(@RequestBody Plane plane){
-        planeService.create(plane);
-    }
 
     public void createTime(@RequestBody TimeDTO time){
 
@@ -209,24 +182,6 @@ public class TicketsFacade implements ITicketsFacade {
         fromService.create(from);
         }
 
-
-    public Plane getPlaneById(@PathVariable Long id){
-        return planeService.getById(id);
-    }
-
-
-    public void deletePlane(@PathVariable Long id){
-        planeService.delete(id);
-    }
-
-
-    public TimeTicket getTimeById (@PathVariable Long id){
-        return fromService.getTimeById(id);
-    }
-
-    public List<TimeTicket> getTime (){
-        return fromService.getTime();
-    }
 
     public void deleteTime (@PathVariable Long id){
        timeService.deleteById(id);

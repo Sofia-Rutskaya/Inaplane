@@ -11,7 +11,7 @@
         <!-- NAVIGATION MENUS -->
         <div class="menu">
             <li><a href="/home">Home</a></li>
-            <li><a href="/">About</a></li>
+            <li><a href="/policy">About</a></li>
             <li>
                 <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
@@ -33,11 +33,12 @@
 
 
 <div class="container middle-item ">
-    <div class=" ticket-place">
-        <div class="grid">
+    <div class="ticket-place">
+        
         <th:block  th:each="items, state : ${model.getTime()}" >
 
-                <form th:object="${model}" th:action="@{'/catalog/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${model.dateBookingTicket} +'&time_ticket=' + ${items}}" th:method="POST">
+                <form th:object="${model}" th:action="@{'/booking/tickets?id_ticket=' + ${model.id} +'&date_ticket=' + ${model.dateBookingTicket} +'&time_ticket=' + ${items.time.toString()}}" th:method="POST">
+
                     <div class=" air-ticket">
                         <label>From   </label>
                     <td th:text="${model.cityFrom}"></td>
@@ -47,20 +48,26 @@
                         <label>Date:   </label>
                     <td th:field="*{dateBookingTicket}"  th:text="${model.dateBookingTicket} "></td>
                         <label>Time:   </label>
-                    <td th:field="*{time}" th:text="${items}" name="${items}"></td>
+                    <td th:field="*{timeBookingTicket}" th:text="${items.time.toString()}" name="${items}"></td>
                         <br>
-                    <td th:text="${model.price}" ></td>
-                    <td th:text="${model.currency}" ></td>
-                    </div>
-                    <div class="grid grid-profile">
-                        <button class="button-buy-ticket" type="submit">BUY</button>
+                        <td th:text="${model.price}" ></td>
+                        <td th:text="${model.currency}" ></td>
+                    <div style="width: 100%;margin: 2% 0%;">
+
+                        <button style="width: 100%;" class="button-buy-ticket" type="submit">BUY</button>
                     </div>
 
+                    </div>
+
+
+              
                 </form>
-
+<div>
+    <br>
+</div>
 
         </th:block>
-    </div>
+    
     </div>
 
 
@@ -70,20 +77,11 @@
 </html>
 
 <style>
-.grid {
-    margin: 5% 5% 5% 15%;
-	display: grid;
-	position:absolute;
-  
-	grid-gap: 20px;
-}
 
-     .grid.grid-profile{
-        position:absolute;
-        margin: 5% 10%;
-        color: black;
-
-     }
+    .ticket-place{
+        width: 1300px;
+        margin: auto;
+    }
 
     .grid.grid-profile label{
         color: black;

@@ -51,7 +51,7 @@ public class HomeController {
         if(id == null){
             return "redirect:/home?error";
         }
-        return "redirect:/catalog/tickets?id_ticket=" + id +"&date_ticket=" + date;
+        return "redirect:/booking/tickets?id_ticket=" + id +"&date_ticket=" + date;
     }
     @GetMapping("/showUserInfo")
     public String getUser(@CurrentSecurityContext SecurityContext context, HttpServletRequest request,
@@ -68,6 +68,10 @@ public class HomeController {
     @GetMapping("/admin")
     public String adminPage(){
         return "admin";
+    }
+ @GetMapping("/policy")
+    public String policy(){
+        return "policy";
     }
 
 

@@ -30,8 +30,8 @@ private final UserDetailService userDetailService;
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests()
-                .antMatchers("/admin", "/catalog/add_ticket", "/admin/remove_ticket").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/error", "/auth/registration","/showUserInfo" ,"/home", "/catalog/**", "/booking/**", "/profile").permitAll()
+                .antMatchers("/admin", "/catalog/add_ticket", "/admin/remove_ticket", "/catalog/**").hasRole("ADMIN")
+                .antMatchers("/auth/login", "/error", "/auth/registration","/showUserInfo" ,"/home", "/booking/**", "/profile").permitAll()
                 .anyRequest().hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin().loginPage("/auth/login")

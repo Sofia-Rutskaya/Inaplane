@@ -29,14 +29,14 @@ public class Pagination <dto extends BaseDTO>{
 
        try{
            if(this.getCurrentPage() == 0){
-               for(int j = 0; j < this.getItemsSize(); j++){
+               for(int j = 0; j < this.getPageSize(); j++){
                    resultItem.add(items.get(j));
                }
                return resultItem;
            }
 
            for (int i = 1; i < this.getTotalPageSize(); i++){
-               for(int j = 0; j <  this.getItemsSize(); j++){
+               for(int j = 0; j <  this.getPageSize(); j++){
                    if(i == this.getCurrentPage()){
                        resultItem.add(items.stream().skip((i) * itemsSize).toList().get(j));
                    }

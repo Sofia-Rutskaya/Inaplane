@@ -10,13 +10,12 @@
         <!-- NAVIGATION MENUS -->
         <div class="menu">
             <li><a href="/home">Home</a></li>
-            <li><a href="/">About</a></li>
+            <li><a href="/policy">About</a></li>
             <li>
                 <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                     <input hidden type="submit" value="Sign Out"/>
                 </form></li>
-            <li><a href="/">Contact</a></li>
         </div>
     </ul>
 </nav>
@@ -40,7 +39,7 @@
                 <br/>
                 <label th:field="*{dateBookingTicket}"  th:text="'Date:   ' + ${userBooking.getDateBookingTicket()}"> Date:</label>
                 <br/>
-                <label  th:field="*{timeBookingTicket}" th:text="'Time:   ' + ${userBooking.timeBookingTicket}"> Time:</label>
+                <label  th:field="*{timeBookingTicket}" th:text="'Time:   ' + ${userBooking.getTimeBookingTicket()}"> Time:</label>
                 <br/>
                 <label th:text="'Flight time:   ' + ${userBooking.time_in}">Flight time</label>
                 <br/>

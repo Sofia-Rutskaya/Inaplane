@@ -24,6 +24,39 @@ public class BookingController {
         this.userFacade = userFacade;
     }
 
+    @GetMapping("/tickets")
+    public String getAllTickets ( @RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
+                                  @ModelAttribute("model") TicketsDTO model){
+        //var ticket = ticketsFacade.getAllTickets();
+        try{
+            //LocalDate dateTicket = LocalDate.parse(date);
+            var ticket = ticketsFacade.getTicketById(id);
+
+
+            model.setTime(ticket.getTime());
+            model.dateBookingTicket = date;
+            model.time = ticket.getTime();
+            model.cityFrom = ticket.cityFrom;
+            model.countryFrom = ticket.countryFrom;
+            model.city_to = ticket.city_to;
+            model.currency = ticket.currency;
+            model.price = ticket.price;
+            model.time_in = ticket.time_in;
+            model.id = ticket.id;
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+        return "/catalog/tickets";
+    }
+
+    @RequestMapping(value = "/tickets", method = RequestMethod.POST)
+    public String getFilterTickets (@RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
+                                    @RequestParam(value = "time_ticket") String time){
+        //var ticket = ticketsFacade.getAllTickets();
+        return "redirect:/booking/ticket?id_ticket=" + id +"&date_ticket=" + date +"&time_ticket=" + time;
+    }
     @GetMapping("/ticket")
     public String bookTicket(@RequestParam(value = "id_ticket") Long id, @RequestParam(value = "date_ticket") String date,
                              @RequestParam(value = "time_ticket") String time,  Model model){
@@ -94,6 +127,11 @@ public class BookingController {
         if (name == null){
             return "redirect:/auth/login";
         }
+
+        if(SecurityUtil.hasRole("ROLE_ADMIN")){
+            return "redirect:/catalog/add_ticket";
+        }
+
         var user = userFacade.getUserTickets(name);
         model.setTicket(user);
         return "profile";
