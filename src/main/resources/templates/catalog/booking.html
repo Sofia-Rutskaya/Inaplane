@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+</head>
+<body>
+<nav class="navbar">
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/policy">About</a></li>
+            <li>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form></li>
+        </div>
+    </ul>
+</nav>
+
+<div class="grid" style="margin-top: 5%;">
+    <div class="middle-item">
+    <div>
+        <h1 style="align-items: center; text-align: center; font-size: 250%;">Book a ticket</h1>
+    </div>
+        <div class="items">
+            <form  th:object="${userBooking}" th:action="@{'/booking/ticket?id_ticket=' + ${userBooking.id} +'&date_ticket='
++ ${userBooking.dateBookingTicket} +'&time_ticket=' + ${userBooking.timeBookingTicket}}" th:method="POST">
+
+                <label class="label-mp" th:text="${userBooking.countryFrom}"  th:field="${userBooking.countryFrom}">countryFrom:</label>
+                <br/>
+                <label class="label-mp" th:text="${userBooking.cityFrom}" th:field="${userBooking.cityFrom}">cityFrom:</label>
+                <br/>
+                <label class="label-mp" th:text="${userBooking.country_to}" th:field="${userBooking.country_to}">country_to:</label>
+                <br/>
+                <label  class="label-mp" th:text="${userBooking.city_to}"  th:field="${userBooking.city_to}">city_to:</label>
+                <br/>
+                <label th:field="*{dateBookingTicket}"  th:text="'Date:   ' + ${userBooking.getDateBookingTicket()}"> Date:</label>
+                <br/>
+                <label  th:field="*{timeBookingTicket}" th:text="'Time:   ' + ${userBooking.getTimeBookingTicket()}"> Time:</label>
+                <br/>
+                <label th:text="'Flight time:   ' + ${userBooking.time_in}">Flight time</label>
+                <br/>
+                <label th:text="${userBooking.price} + ${userBooking.currency}">price</label>
+
+
+                <div class="columns">
+
+                    <div>
+                        <label>Choose ticket type: </label>
+                        <select   style="   font-size: 75%;width: 200px;"  class="form-control" id="dropDownList2"  th:name="type_ticket">
+                        <option th:each="state : ${T(com.Airtickets.Inaplane.persistence.types.TicketTypeClass).values()}"
+                                th:value="${state}"
+                                th:text="${state.title}" >
+
+                        </option>
+                    </select>
+
+                        <label>Choose age ticket: </label>
+                        <select style=" font-size: 75%;width: 200px;"   class="form-control" id="dropDownList4" th:name="age_ticket" >
+                            <option th:each="state : ${T(com.Airtickets.Inaplane.persistence.types.AgeTicket).values()}"
+                                    th:value="${state.toString()}"
+                                    th:text="${state.title}">
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div>
+                        <label>Name: </label>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <td th:field="${userBooking.userDTO.fullName}" th:text="${userBooking.getUserDTO().fullName}"></td>
+                    </div>
+                    <div>
+                        <label>Email: </label>
+                        <td th:text="${userBooking.userDTO.email}"></td>
+                    </div>
+                </div>
+
+
+                <div>
+                    <input class="button-buy-ticket" type="submit" >
+                </div>
+            </form>
+        </div>
+
+</div>
+
+<div class="grid grid-profile">
+    <div class="packages">
+        <h3>Economy Package</h3>
+        <li>Hand luggage up to 5 kg</li>
+        <label th:text="'Price: ' + ${userBooking.price} + ${userBooking.currency}"> </label>
+    </div>
+    
+    <div  class="packages">
+        <h3>Business Package</h3>
+        <li>Hand luggage up to 5 kg</li>
+        <li>Suitcase up to 10 kg</li>
+        <li>Soft drinks</li>
+        <label th:text="'Price: ' + ${userBooking.price + ((userBooking.price * 30) /100)} + ${userBooking.currency}"> </label>
+    </div>
+    
+    <div  class="packages">
+        <h3>First Package</h3>
+        <li>Hand luggage up to 15 kg</li>
+        <li>Suitcase up to 50 kg</li>
+        <li>Food and drinks</li>
+        <li>Help of flight attendants</li>
+        <label th:text="'Price: ' + ${userBooking.price + ((userBooking.price * 70) /100)} + ${userBooking.currency}"> </label>
+    </div>
+    
+</div>
+
+</div>
+</body>
+</html>
+
+
+
+<style>
+    .packages{
+        width: 400px;
+        background-color: white;
+        margin: 3% 1% 1% 5%;
+        font-size: larger;
+        border-radius: 0.5em;
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-bottom: 5%;
+    }
+.label-mp{
+    margin: 5%;
+    padding: 4%;
+}
+.grid {
+	display: grid;
+	position:absolute;
+
+    border: #000;
+    border-radius: 4px;
+	grid-gap: 5px;
+}
+
+
+     .grid.grid-profile{
+        position:absolute;
+        margin: 5% 200%;
+        color: black;
+        width: 400px;
+     }
+
+    .grid.grid-profile label{
+        color: black;
+     }
+    .items label{
+        padding: 5%;
+        margin: 5%;
+    }
+    .form-control{
+        background-color: #f8f9fa;
+      
+        padding: 15px 15px;
+        margin-bottom: 1.3rem;
+        border-radius: 0.5rem;
+    }
+    .form-control:focus {
+
+        color: #000;
+        background-color: #fff;
+        border:2px solid #2674e8;
+        outline: 0;
+        box-shadow: none;
+
+    }
+    .columns{
+        margin: 3% 10% 0% 10%;
+        padding:0.5rem 3.5rem 0.5rem 3.5rem;
+
+    }
+    body{
+        background-image: url("https://images.pexels.com/photos/4737484/pexels-photo-4737484.jpeg");
+
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .middle-item{
+        margin: 1% 15% 10% 15%;
+        padding: 5% 15% 5% 15%;
+        background-color: white;
+        border-radius: 0.5rem;
+        width: 500px;
+    }
+    .items{
+        text-align: center;
+        font-size: 120%;
+    }
+
+    .button-buy-ticket{
+        text-align: right;
+        margin: 6% 20% 3% 12%;
+        padding: 0% 25% 0% 25%;
+        color: #c6cfe1;
+        border-radius: 0.5rem;
+        box-shadow: none;
+        font-size: 155%;
+        border-color: #2674e8;
+        background-color: #2674e8;
+    }
+    .air-ticket{
+        margin: 1% 5% 0% 5%;
+        background-color: #ffffff;
+        padding: 1% 1% 1% 5%;
+        text-align: center;
+        color: #2674e8;
+        font-size: 200%;
+        border-radius: 2rem;
+    }
+
+    .navbar {
+        margin: -1%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+      
+        color: #fff;
+    }
+    .nav-links a {
+        color: #fff;
+    }
+    /* LOGO */
+    .logo {
+        font-size: 32px;
+    }
+    /* NAVBAR MENU */
+    .menu {
+        display: flex;
+        gap: 1em;
+        font-size: 18px;
+    }
+    .menu li:hover {
+        background-color: #38609b;
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+    .menu li {
+        padding: 5px 14px;
+    }
+    /* DROPDOWN MENU */
+    .services {
+        position: relative;
+    }
+    .dropdown {
+        background-color:  #2674e8;
+        padding: 1em 0;
+        position: absolute; /*WITH RESPECT TO PARENT*/
+        display: none;
+        border-radius: 8px;
+        top: 35px;
+    }
+    .dropdown li + li {
+        margin-top: 10px;
+    }
+    .dropdown li {
+        padding: 0.5em 1em;
+        width: 8em;
+        text-align: center;
+    }
+    .dropdown li:hover {
+        background-color: #2f3a69;
+    }
+    .services:hover .dropdown {
+        display: block;
+    }
+
+</style>

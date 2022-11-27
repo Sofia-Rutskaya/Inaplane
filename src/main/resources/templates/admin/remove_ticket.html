@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="navbar">
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <!-- NAVIGATION MENUS -->
+            <div class="menu">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/">About</a></li>
+                <li>
+                    <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                        <input hidden type="submit" value="Sign Out"/>
+                    </form></li>
+                <li><a href="/">Contact</a></li>
+            </div>
+        </ul>
+    </nav>
+</div>
+<label>REMOVE TICKET</label>
+<div class="tableTicket">
+
+    <table class="table" border="1">
+        <tr style="background-color: #6590d1;">
+            <th>Country From</th>
+            <th>City From</th>
+            <th>Country To</th>
+            <th>City To</th>
+            <th>Date Time</th>
+            <th>Flight time</th>
+            <th>Plane Name</th>
+            <th>All places</th>
+            <th>First places</th>
+            <th>Business places</th>
+            <th>Economy places</th>
+            <th>Price</th>
+            <th>Currency</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="ticket : ${model.tickets}">
+
+            <td th:text="${ticket.getTicketsDTO().countryFrom}"></td>
+            <th th:text="${ticket.getTicketsDTO().cityFrom}"></th>
+            <th th:text="${ticket.getTicketsDTO().country_to}"></th>
+            <th th:text="${ticket.getTicketsDTO().city_to}"></th>
+            <th>
+                <a th:href="@{'/catalog/time_ticket/' + ${ticket.getTicketsDTO().id} + '/add?currentPage=0'}" type="button"> Time </a>
+            </th>
+            <th th:text="${ticket.getTicketsDTO().time_in}"></th>
+            <th th:text="${ticket.getPlanes().planeName}"></th>
+            <th th:text="${ticket.getPlanes().allCountPlaces}"></th>
+            <th th:text="${ticket.getPlanes().firstFreePlaces}"></th>
+            <th th:text="${ticket.getPlanes().businessFreePlaces}"></th>
+            <th th:text="${ticket.getPlanes().economyFreePlaces}"></th>
+            <th th:text="${ticket.getTicketsDTO().price}"></th>
+            <th th:text="${ticket.getTicketsDTO().currency}"></th>
+            <th>
+                <form th:action="@{/catalog/add_ticket}" method="get">
+                    <input class="btn" type="submit" value="Add" />
+                </form>
+                <form th:action="@{'/catalog/remove_ticket/' + ${ticket.getTicketsDTO().id}}" method="post">
+                <input class="btn" type="submit" th:value="Delete"/>
+            </form>
+            </th>
+    
+        </tr>
+    </table>
+<span class="text-center">
+    <a class="navigation-table"   th:href="@{'/catalog/remove_ticket?currentPage=' + ${(model.getCurrentPage() - 1)}}" > < Previous</a>
+
+    <a class="navigation-table"   th:href="@{'/catalog/remove_ticket?currentPage=' + ${(model.getCurrentPage() + 1)}}">Next > </a>
+    </span>
+</div>
+</body>
+</html>
+
+
+<style>
+
+    body{
+        margin-left: auto;
+        margin-right: auto;
+        color: rgb(45, 45, 110);
+    }
+
+    th{
+        font-size: larger;
+    }
+    label{
+        color: white;
+        display: block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5%;
+        padding-bottom: 1%;
+        font-size: 150%;
+    }
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        color: #fff;
+    }
+    .nav-links a {
+        color: #fff;
+    }
+    /* LOGO */
+    .logo {
+        font-size: 32px;
+    }
+    /* NAVBAR MENU */
+    .menu {
+        display: flex;
+        gap: 1em;
+        font-size: 18px;
+    }
+    .menu li:hover {
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+    .menu li {
+        padding: 5px 14px;
+    }
+    /* DROPDOWN MENU */
+    .services {
+        position: relative;
+    }
+    .dropdown {
+        padding: 1em 0;
+        position: absolute; /*WITH RESPECT TO PARENT*/
+        display: none;
+        border-radius: 8px;
+        top: 35px;
+    }
+    .dropdown li + li {
+        margin-top: 10px;
+    }
+    .dropdown li {
+        padding: 0.5em 1em;
+        width: 8em;
+        text-align: center;
+    }
+    .dropdown li:hover {
+        background-color: #2f3a69;
+    }
+    .services:hover .dropdown {
+        display: block;
+    }
+
+
+    .navigation-table{
+        color: white;
+        margin-left: 5%;
+        margin-right: auto;
+
+        text-align: center;
+    }
+    .table{
+        background-color:white;
+        margin: auto;
+    }
+    .tableTicket{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .middle-info{
+        margin: 20% 5% 5% 5%;
+        background-color: #e2e6f5;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        border-radius: 1rem;
+    }
+    body{
+        background-image: url("https://images.pexels.com/photos/4737484/pexels-photo-4737484.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .butt-Logout{
+        justify-content: space-between;
+        padding: 20px;
+        color: #fff;
+
+        border-radius: 5px;
+    }
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        color: #fff;
+    }
+    .nav-links a {
+        color: #fff;
+    }
+    /* LOGO */
+    .logo {
+        font-size: 32px;
+    }
+    /* NAVBAR MENU */
+    .menu {
+        display: flex;
+        gap: 1em;
+        font-size: 18px;
+    }
+    .menu li:hover {
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+    .menu li {
+        padding: 5px 14px;
+    }
+    /* DROPDOWN MENU */
+    .services {
+        position: relative;
+    }
+    .dropdown {
+        padding: 1em 0;
+        position: absolute; /*WITH RESPECT TO PARENT*/
+        display: none;
+        border-radius: 8px;
+        top: 35px;
+    }
+    .dropdown li + li {
+        margin-top: 10px;
+    }
+    .dropdown li {
+        padding: 0.5em 1em;
+        width: 8em;
+        text-align: center;
+    }
+    .dropdown li:hover {
+        background-color: #2f3a69;
+    }
+    .services:hover .dropdown {
+        display: block;
+    }
+
+
+
+    .columns{
+        margin: 3% 10% 10% 10%;
+        column-count: 4;
+        padding:3.5rem 3.5rem 3.5rem 3.5rem;
+
+    }
+
+    .columnBody{
+        margin: 7% 5% 10% 10%;
+        column-count: 3;
+        text-align: center;
+    }
+    .columnBody img{
+        margin: 1% 10% 1% 19%;
+        column-count: 3;
+    }
+    .btn{
+        width: 60px;
+        height: 40px;
+        background: #2674e8;
+        border: #2243e1;
+        text-align: center;
+    }
+    .btn:hover {
+        background: #29d9f1;
+        border: #249de7;
+    }
+    input[type="date"] {
+        padding: 1% 5%;
+        font-size: 1.3rem;
+        width: 100%;
+        height: 3rem;
+        font-family:monospace;
+        border:1px solid #8292a2;
+        border-radius:0.25rem;
+        background:
+                rgb(255, 255, 255)
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='22' viewBox='0 0 20 22'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23688EBB' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' transform='translate(1 1)'%3E%3Crect width='18' height='18' y='2' rx='2'/%3E%3Cpath d='M13 0L13 4M5 0L5 4M0 8L18 8'/%3E%3C/g%3E%3C/svg%3E")
+                right 1rem
+                center
+                no-repeat;
+
+        cursor:pointer;
+    }
+    input[type="date"]:focus {
+        outline:none;
+        border-color:#25414b;
+        box-shadow:0 0 0 0.25rem rgba(0, 120, 250, 0.1);
+    }
+
+    ::-webkit-datetime-edit-month-field:hover,
+    ::-webkit-datetime-edit-day-field:hover,
+    ::-webkit-datetime-edit-year-field:hover {
+        background:rgba(0, 120, 250, 0.1);
+    }
+    ::-webkit-datetime-edit-text {
+        opacity:0;
+    }
+    ::-webkit-clear-button,
+    ::-webkit-inner-spin-button {
+        display:none;
+    }
+    ::-webkit-calendar-picker-indicator {
+        position:absolute;
+        width:2.5rem;
+        height:100%;
+        top:0;
+        right:0;
+        bottom:0;
+
+        opacity:0;
+        cursor:pointer;
+
+        color:rgba(0, 120, 250, 1);
+        background:rgba(0, 120, 250, 1);
+
+    }
+
+    input[type="date"]:hover::-webkit-calendar-picker-indicator { opacity:0.05; }
+    input[type="date"]:hover::-webkit-calendar-picker-indicator:hover { opacity:0.15; }
+
+
+
+</style>
+

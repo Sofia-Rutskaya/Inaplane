@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+    <link rel="stylesheet" href="/src/main/resources/css/style.css">
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+
+<link rel="import" href="/src/main/resources/templates/header.html">
+<body>
+
+<nav class="navbar">
+    <ul class="nav-links">
+        <!-- NAVIGATION MENUS -->
+        <div class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form></li>
+            <li><a href="/">Contact</a></li>
+        </div>
+    </ul>
+</nav>
+
+<div class="grid">
+<h2>About this policy</h2>
+<p>Together with our terms and conditions and cookie policy, 
+    this policy explains how we collect your information across all of our websites,
+     mobile applications and other services and how we treat it. We will review this policy
+      from time to time to ensure it is up to date. If we decide to change it, the most current 
+      version will be posted here. If we make significant changes, we will notify you the next 
+      time you use our services or through other communication channels.</p>
+
+
+
+<h2>Why and how do we use your personal data?</h2>
+<p>We use your information only when you give your consent to do so, 
+    when it is necessary to provide the services you have requested, when it is 
+    necessary to exercise or exercise legal rights or obligations, or in connection 
+    with normal business purposes similar to those described in this policy.</p>
+
+    <h2>What personal data do we collect?</h2>
+
+    <p>We collect, store and process certain information about each person who uses our
+         services. But we do not collect information beyond what is necessary. </p>
+
+
+<h2>How long do we keep your personal data?</h2>
+<p>We only keep your data for as long as we need it, or for as long as we are required by law to do so. 
+    After that, we either delete them or make them anonymous so that they do not identify you. We treat data 
+    differently depending on what it is used for, but you can ask us to delete your personal data at any time.</p> 
+
+<h2>When do third parties receive or collect your information?</h2>
+<p>We share your information only when you ask us to, when it is necessary to do business with you and provide
+     services to you, or when we are required to do so by law. The companies you book with Skyscanner (such as
+      airlines or hotels) will collect your data in accordance with their own policies. Sometimes companies that
+       use our services to advertise may also collect your information (see Do we use cookies or other similar 
+       technologies? ). Finally, companies that help us deliver our services will also collect and use your data on our behalf.</p>
+
+<h2>How do we ensure the protection of your personal data?</h2>
+<p>Protecting your privacy is an integral part of our company culture. We do it using industry standard methods.</p>
+
+</div>
+</body>
+</html>
+
+
+
+<style>
+    .packages{
+        width: 400px;
+        background-color: white;
+        font-size: larger;
+        border-radius: 0.5em;
+        padding-left: 25%;
+        padding-right: 25%;
+        padding-bottom: 5%;
+    }
+.label-mp{
+    margin: 5%;
+    padding: 4%;
+}
+.grid {
+
+	display: grid;
+	position:absolute;
+    background-color: white;
+    border: #000;
+    border-radius: 4px;
+	grid-gap: 5px;
+    margin: 5%;
+    padding: 3%;
+}
+
+
+     .grid.grid-profile{
+        position:absolute;
+        margin: 5% 200%;
+        color: black;
+        width: 400px;
+     }
+
+    .grid.grid-profile label{
+        color: black;
+     }
+    .items label{
+        padding: 5%;
+        margin: 5%;
+    }
+    .form-control{
+        background-color: #f8f9fa;
+      
+        padding: 15px 15px;
+        margin-bottom: 1.3rem;
+        border-radius: 0.5rem;
+    }
+    .form-control:focus {
+
+        color: #000;
+        background-color: #fff;
+        border:2px solid #2674e8;
+        outline: 0;
+        box-shadow: none;
+
+    }
+    .columns{
+        margin: 3% 10% 0% 10%;
+        padding:0.5rem 3.5rem 0.5rem 3.5rem;
+
+    }
+    body{
+        background-image: url("https://images.pexels.com/photos/4737484/pexels-photo-4737484.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .middle-item{
+        margin: 1% 15% 10% 15%;
+        padding: 5% 15% 5% 15%;
+        background-color: white;
+        border-radius: 0.5rem;
+        width: 500px;
+    }
+    .items{
+        text-align: center;
+        font-size: 120%;
+    }
+
+    .button-buy-ticket{
+        text-align: right;
+        margin: 6% 20% 3% 12%;
+        padding: 0% 25% 0% 25%;
+        color: #c6cfe1;
+        border-radius: 0.5rem;
+        box-shadow: none;
+        font-size: 155%;
+        border-color: #2674e8;
+        background-color: #2674e8;
+    }
+    .air-ticket{
+        margin: 1% 5% 0% 5%;
+        background-color: #ffffff;
+        padding: 1% 1% 1% 5%;
+        text-align: center;
+        color: #2674e8;
+        font-size: 200%;
+        border-radius: 2rem;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+      
+        color: #fff;
+    }
+    .nav-links a {
+        color: #fff;
+    }
+    /* LOGO */
+    .logo {
+        font-size: 32px;
+    }
+    /* NAVBAR MENU */
+    .menu {
+        display: flex;
+        gap: 1em;
+        font-size: 18px;
+    }
+    .menu li:hover {
+        background-color: #38609b;
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+    .menu li {
+        padding: 5px 14px;
+    }
+    /* DROPDOWN MENU */
+    .services {
+        position: relative;
+    }
+    .dropdown {
+        background-color:  #2674e8;
+        padding: 1em 0;
+        position: absolute; /*WITH RESPECT TO PARENT*/
+        display: none;
+        border-radius: 8px;
+        top: 35px;
+    }
+    .dropdown li + li {
+        margin-top: 10px;
+    }
+    .dropdown li {
+        padding: 0.5em 1em;
+        width: 8em;
+        text-align: center;
+    }
+    .dropdown li:hover {
+        background-color: #2f3a69;
+    }
+    .services:hover .dropdown {
+        display: block;
+    }
+
+</style>
